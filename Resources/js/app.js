@@ -115,6 +115,22 @@
         return false;
     });
 
+    // post new plurk
+    $('#post-new-form').submit(function(){
+        var text = $('#post-new-text').val();
+        var url = base_url + '/Timeline/plurkAdd';
+
+        oauth.request({
+            method: 'POST',
+            'url': url,
+            data: {'content': text, 'qualifier': ':', 'limited_to': '[0]'},
+            success: function(data){
+            },
+            failure: function(data){ console.log("error"); console.log(data); }
+        });
+        return false;
+    });
+
     // menu
     var url = base_url + '/Users/me';
     oauth.get(url , function(data){
