@@ -38,7 +38,7 @@
             size = 'medium';
         }
         return user.has_profile_image ? ('http://avatars.plurk.com/' + user.id + '-' + size +
-                (0 == user.avatar ? '' : user.avatar) + '.gif') : 'http://www.plurk.com/static/default_medium.gif';
+                (!user.avatar ? '' : user.avatar) + '.gif') : 'http://www.plurk.com/static/default_medium.gif';
     };
 
     // timeline
