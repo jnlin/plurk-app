@@ -194,11 +194,13 @@
     var url = base_url + '/Users/me';
     oauth.get(url , function(data){
         data = JSON.parse(data.text);
-        $.tmpl($('#menu'), {
+        profile = {
             'avatar': get_avatar(data),
             'display_name': data.display_name,
             'karma': data.karma,
-        }).appendTo('#profile');
+        };
+        $.tmpl($('#menu'), profile).appendTo('#profile');
+        $.tmpl($('#panel-profile'), profile).prependTo('#post-new-panel-head');
 
         $('#profile').attr('data-userid', data.id);
     });

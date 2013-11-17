@@ -51,7 +51,17 @@
         <div class="row clearfix" id="post-new-panel">
         <div class="col-md-12 column">
         <div class="panel panel-warning">
-        <div class="panel-heading media">
+        <div class="panel-heading media" id="post-new-panel-head">
+        <script type="text/html" id="panel-profile">
+        <div class="post-avatar pull-left">
+        <img src="${avatar}" class="img-rounded">
+        </div>
+        <div class="post-owner media-body">
+        <h4 class="media-heading">
+        ${display_name}
+        </h4>
+        </div>
+        </script>
         <form id="post-new-form" role="form">
         <div class="form-group">
         <input type="text" class="form-control" id="post-new-text" placeholder="我要發噗...">
