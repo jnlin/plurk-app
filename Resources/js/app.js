@@ -41,6 +41,40 @@
                 (0 == user.avatar ? '' : user.avatar) + '.gif') : 'http://www.plurk.com/static/default_medium.gif';
     };
 
+    // timeline
+    var load_timeline = function(offset) {
+        var url = base_url + '/Timeline/getPlurks';
+        oauth.get(url, function(data) {
+            var posts = new Array();
+            data = JSON.parse(data.text);
+            for (var i in data.plurks) {
+                var plurk = data.plurks[i];
+                var owner = data.plurk_users[plurk.owner_id];
+                posts.push({
+                    avatar: get_avatar(owner),
+                    content: plurk.content,
+                    display_name: owner.display_name,
+                    favorite: plurk.favorite ? 1 : 0,
+                    favorite_count: plurk.favorite_count,
+                    is_unread: plurk.is_unread,
+                    plurk_id: plurk.plurk_id,
+                    posted: (new Date(Date.parse(plurk.posted))).toLocaleString(),
+                    private_plurk: null === plurk.limited_to ? 0 : 1,
+                    response_count: plurk.response_count,
+                    replurkers_count: plurk.replurkers_count,
+                    replurkable: plurk.replurkable
+                });
+            }
+
+            if (!offset) {
+                $('#timeline').empty();
+            }
+            $.tmpl($('#post'), posts).appendTo('#timeline');
+            },
+        function(data) { console.log("error"); console.log(data); });
+    }
+
+
     $('#timeline').on('click', 'div.post-content, a.post-btn-reply', function(){
         var $container = $(this).parents('div.post-container').first();
         var id = $container.attr('data-plurkid');
@@ -144,31 +178,5 @@
         $('#profile').attr('data-userid', data.id);
     });
 
-    // timeline
-    var url = base_url + '/Timeline/getPlurks';
-    oauth.get(url, function(data) {
-            var posts = new Array();
-            data = JSON.parse(data.text);
-            for (var i in data.plurks) {
-                var plurk = data.plurks[i];
-                var owner = data.plurk_users[plurk.owner_id];
-                posts.push({
-                    avatar: get_avatar(owner),
-                    content: plurk.content,
-                    display_name: owner.display_name,
-                    favorite: plurk.favorite ? 1 : 0,
-                    favorite_count: plurk.favorite_count,
-                    is_unread: plurk.is_unread,
-                    plurk_id: plurk.plurk_id,
-                    posted: (new Date(Date.parse(plurk.posted))).toLocaleString(),
-                    private_plurk: null === plurk.limited_to ? 0 : 1,
-                    response_count: plurk.response_count,
-                    replurkers_count: plurk.replurkers_count,
-                    replurkable: plurk.replurkable
-                });
-            }
-
-            $.tmpl($('#post'), posts).appendTo('#timeline');
-            },
-    function(data) { console.log("error"); console.log(data); });
+    load_timeline();
 })(jQuery);
