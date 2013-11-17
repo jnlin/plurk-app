@@ -327,11 +327,16 @@ exports.OAuth = (function (global) {
              *      failure {function} callback for a failed request
              */
             this.request = function (options) {
-                var method, url, data, headers, success, failure, xhr, i,
+                var async, method, url, data, headers, success, failure, xhr, i,
                     headerParams, signatureMethod, signatureString, signature,
                     query = [], appendQueryString, signatureData = {}, params, withFile, urlString;
 
                 method = options.method || 'GET';
+                if (false === options.async) {
+                    async = false;
+                } else {
+                    async = true;
+                }
                 url = URI(options.url);
                 data = options.data || {};
                 headers = options.headers || {};
@@ -473,7 +478,7 @@ exports.OAuth = (function (global) {
                     }
                 }
 
-                xhr.open(method, url+'', true);
+                xhr.open(method, url+'', async);
 
                 xhr.setRequestHeader('Authorization', 'OAuth ' + toHeaderString(headerParams));
                 xhr.setRequestHeader('X-Requested-With','XMLHttpRequest');
