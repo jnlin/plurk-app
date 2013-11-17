@@ -34,6 +34,14 @@
             failure: function(data){ onsole.log("error"); console.log(data); }});
     };
 
+    var get_avatar = function(user, size) {
+        if (null === size) {
+            size = 'medium';
+        }
+        return user.has_profile_image ? ('http://avatars.plurk.com/' + user.id + '-' + size +
+                (0 == user.avatar ? '' : user.avatar) + '.gif') : 'http://www.plurk.com/static/default_medium.gif';
+    };
+
     $('#timeline').on('click', 'div.post-content, a.post-btn-reply', function(){
         var $container = $(this).parents('div.post-container').first();
         var id = $container.attr('data-plurkid');
@@ -116,8 +124,7 @@
                 var plurk = data.plurks[i];
                 var owner = data.plurk_users[plurk.owner_id];
                 posts.push({
-                    avatar: owner.has_profile_image ? ('http://avatars.plurk.com/' + plurk.owner_id + '-medium' +
-                                (0 == owner.avatar ? '' : owner.avatar) + '.gif') : 'http://www.plurk.com/static/default_medium.gif',
+                    avatar: get_avatar(owner),
                     content: plurk.content,
                     display_name: owner.display_name,
                     favorite: plurk.favorite ? 1 : 0,
