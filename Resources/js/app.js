@@ -263,6 +263,7 @@
     // refresh
     $('#btn-refresh').click(function(){
         load_timeline();
+        update_cliques();
         return false;
     });
 
@@ -280,6 +281,24 @@
         $('#root').attr('data-userid', data.id);
     });
 
+    // cliques
+    var cliques = [];
+    var clique_members = [];
+    var update_cliques = function() {
+        var url = base_url + '/Cliques/getCliques';
+        cliques = [];
+        clique_members = [];
+        oauth.get(url, function(data){
+            data = JSON.parse(data.text);
+            for (var i in data) {
+                cliques.push({id: i, name: data[i]});
+            }
+            $('li.clique-item').remove();
+            $.tmpl($('#filter-clique'), cliques).appendTo('#filter-ul');
+        });
+    };
+
+    update_cliques();
     load_timeline();
 
     // check new plurk
