@@ -151,6 +151,19 @@
             failure: function(data){ onsole.log("error"); console.log(data); }
         });
         return false;
+    }).on('submit', 'form.reply-form', function(){
+        var $container = $(this).parents('div.post-container').first();
+        var id = $container.attr('data-plurkid');
+        url = base_url + '/Responses/responseAdd';
+        oauth.request({
+            method: 'POST',
+            'url': url,
+            data: {'plurk_id': id, content: $(this).find('input.reply-new-text').first().val(), 'qualifier': ':'},
+            success: function(data){
+            },
+            failure: function(data){ onsole.log("error"); console.log(data); }
+        });
+        return false;
     });
 
     // post new plurk

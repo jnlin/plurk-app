@@ -89,6 +89,11 @@ ${display_name}
 </div>
 <table class="table table-striped post-reply" style="display:none">
 </table>
+<form role="form" class="reply-form">
+<div class="form-group">
+<input type="text" class="form-control reply-new-text" placeholder="我要回覆...">
+</div> <button type="submit" class="btn btn-primary">發送</button>
+</form>
 <div class="panel-footer">
 <a href="#" class="post-btn-mute">{{if 2 == is_unread}}回音{{else}}消音{{/if}}</a> |
 <a href="#" class="post-btn-reply">回應</a> (${response_count}) |
