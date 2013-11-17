@@ -20,6 +20,20 @@
     var url = base_url + '/Timeline/getPlurks';
     var oauth = OAuth(options);
 
+    var mark_as_read = function(ids) {
+        var url = base_url + '/Timeline/markAsRead';
+        oauth.request({
+            method: 'POST',
+            'url': url,
+            data: {'ids': '[' + ids.join(',') + ']'},
+            success: function(data){
+                for (var i in ids) {
+                    $('#timeline').find('div[data-plurkid="' + ids[i] + '"]').removeClass('panel-warning').addClass('panel-default');
+                }
+            },
+            failure: function(data){ onsole.log("error"); console.log(data); }});
+    };
+
     $('#timeline').on('click', 'div.post-content, a.post-btn-reply', function(){
         var $container = $(this).parents('div.post-container').first();
         var id = $container.attr('data-plurkid');
