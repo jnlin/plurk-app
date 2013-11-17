@@ -33,6 +33,30 @@
             failure: function(data){ onsole.log("error"); console.log(data); }});
     };
 
+    var load_replies = function(id){
+        var url = base_url + '/Responses/get';
+        oauth.request({
+            method: 'GET',
+            'url': url,
+            data: {'plurk_id': id},
+            success: function(data) {
+            var posts = new Array();
+            data = JSON.parse(data.text);
+            for (var i in data.responses) {
+                var response = data.responses[i];
+                var owner = data.friends[response.user_id];
+                posts.push({
+                    display_name: owner.display_name,
+                    content: response.content
+                });
+            }
+            var $reply = $('#timeline').find('div[data-plurkid="' + id + '"] table.post-reply');
+            $reply.empty().append($.tmpl($('#reply'), posts)).show();
+            mark_as_read([id]);
+        },
+            failure: function(data) { console.log("error"); console.log(data); }});
+    };
+
     var get_avatar = function(user, size) {
         if (!size) {
             size = 'medium';
@@ -74,7 +98,6 @@
         function(data) { console.log("error"); console.log(data); });
     }
 
-
     $('#timeline').on('click', 'div.post-content a, div.reply-text a', function(){
         // open url in default browser
         Ti.Platform.openURL($(this).attr('href'));
@@ -82,27 +105,7 @@
     }).on('click', 'div.post-content, a.post-btn-reply', function(){
         var $container = $(this).parents('div.post-container').first();
         var id = $container.attr('data-plurkid');
-        var url = base_url + '/Responses/get';
-        oauth.request({
-            method: 'GET',
-            'url': url,
-            data: {'plurk_id': id},
-            success: function(data) {
-            var posts = new Array();
-            data = JSON.parse(data.text);
-            for (var i in data.responses) {
-                var response = data.responses[i];
-                var owner = data.friends[response.user_id];
-                posts.push({
-                    display_name: owner.display_name,
-                    content: response.content
-                });
-            }
-            var $reply = $container.find('table.post-reply');
-            $reply.empty().append($.tmpl($('#reply'), posts)).show();
-            mark_as_read([id]);
-        }, 
-            failure: function(data) { console.log("error"); console.log(data); }});
+        load_replies(id);
         return false;
     }).on('click', 'a.post-btn-mute', function(){
         var $container = $(this).parents('div.post-container').first();
