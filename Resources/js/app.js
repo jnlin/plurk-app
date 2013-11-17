@@ -292,6 +292,19 @@
             data = JSON.parse(data.text);
             for (var i in data) {
                 cliques.push({id: i, name: data[i]});
+                clique_members[i] = {};
+                oauth.request({
+                    'url': base_url + '/Cliques/getClique',
+                    'method': 'GET',
+                    'data': {'clique_name': data[i]},
+                    'async': false,
+                    'success': function(data){
+                        console.log(i);
+                        data = JSON.parse(data.text);
+                        for (var j in data) {
+                            clique_members[i][data[j].id + ''] = true;
+                        }
+                    }, failure: function(data){ console.log('error'); console.log(data); }});
             }
             $('li.clique-item').remove();
             $.tmpl($('#filter-clique'), cliques).appendTo('#filter-ul');
