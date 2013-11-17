@@ -60,7 +60,8 @@
                     plurk_id: plurk.plurk_id,
                     posted: (new Date(Date.parse(plurk.posted))).toLocaleString(),
                     response_count: plurk.response_count,
-                    replurkers_count: plurk.replurkers_count
+                    replurkers_count: plurk.replurkers_count,
+                    replurkable: plurk.replurkable
                 });
             }
 
