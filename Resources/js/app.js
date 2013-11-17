@@ -68,35 +68,50 @@
     // timeline
     var load_timeline = function(offset) {
         var url = base_url + '/Timeline/getPlurks';
-        oauth.get(url, function(data) {
-            var posts = new Array();
-            data = JSON.parse(data.text);
-            for (var i in data.plurks) {
-                var plurk = data.plurks[i];
-                var owner = data.plurk_users[plurk.owner_id];
-                posts.push({
-                    avatar: get_avatar(owner),
-                    content: plurk.content,
-                    display_name: owner.display_name,
-                    favorite: plurk.favorite ? 1 : 0,
-                    favorite_count: plurk.favorite_count,
-                    is_unread: plurk.is_unread,
-                    plurk_id: plurk.plurk_id,
-                    posted: (new Date(Date.parse(plurk.posted))).toLocaleString(),
-                    private_plurk: null === plurk.limited_to ? 0 : 1,
-                    response_count: plurk.response_count,
-                    replurkers_count: plurk.replurkers_count,
-                    replurkable: plurk.replurkable
-                });
-            }
+        oauth.request({
+            method: 'GET',
+            'url': url,
+            data: offset ? {'offset': offset} : {},
+            success: function(data){
+                var posts = new Array();
+                var oldest;
+                data = JSON.parse(data.text);
+                for (var i in data.plurks) {
+                    var plurk = data.plurks[i];
+                    var owner = data.plurk_users[plurk.owner_id];
+                    posts.push({
+                        avatar: get_avatar(owner),
+                        content: plurk.content,
+                        display_name: owner.display_name,
+                        favorite: plurk.favorite ? 1 : 0,
+                        favorite_count: plurk.favorite_count,
+                        is_unread: plurk.is_unread,
+                        plurk_id: plurk.plurk_id,
+                        posted: (new Date(Date.parse(plurk.posted))).toLocaleString(),
+                        private_plurk: null === plurk.limited_to ? 0 : 1,
+                        response_count: plurk.response_count,
+                        replurkers_count: plurk.replurkers_count,
+                        replurkable: plurk.replurkable
+                    });
+                    oldest = (new Date(Date.parse(plurk.posted))).toISOString();
+                }
 
-            if (!offset) {
-                $('#timeline').empty();
-            }
-            $.tmpl($('#post'), posts).appendTo('#timeline');
+                if (!offset) {
+                    $('#timeline').empty();
+                }
+                $.tmpl($('#post'), posts).appendTo('#timeline');
+                $(window).scroll(load_more_plurks);
+                $('#root').attr('data-offset', oldest);
             },
-        function(data) { console.log("error"); console.log(data); });
-    }
+            failure: function(data) { console.log("error"); console.log(data); }});
+    };
+
+    var load_more_plurks = function(){
+        if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+            $(window).unbind('scroll');
+            load_timeline($('#root').attr('data-offset'));
+        }
+    };
 
     $('#timeline').on('click', 'div.post-content a, div.reply-text a', function(){
         // open url in default browser
