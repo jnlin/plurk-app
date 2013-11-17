@@ -55,6 +55,7 @@
             }
             var $reply = $container.find('table.post-reply');
             $reply.empty().append($.tmpl($('#reply'), posts)).show();
+            mark_as_read([id]);
         }, 
             failure: function(data) { console.log("error"); console.log(data); }});
         return false;
