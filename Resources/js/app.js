@@ -117,8 +117,9 @@
                         posted: (new Date(Date.parse(plurk.posted))).toLocaleString(),
                         private_plurk: null === plurk.limited_to ? 0 : 1,
                         response_count: plurk.response_count,
-                        replurkers_count: plurk.replurkers_count,
-                        replurkable: plurk.replurkable
+                        replurkable: plurk.replurkable,
+                        replurked: plurk.replurked ? 1 : 0,
+                        replurkers_count: plurk.replurkers_count
                     });
                     oldest = (new Date(Date.parse(plurk.posted))).toISOString();
                 }

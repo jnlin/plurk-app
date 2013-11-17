@@ -141,7 +141,7 @@ ${display_name}
 <a href="#" class="post-btn-mute">{{if 2 == is_unread}}回音{{else}}消音{{/if}}</a> |
 <a href="#" class="post-btn-reply">回應</a> (${response_count}) |
 <a href="#" class="post-btn-favorite">{{if 1 == favorite}}收回讚{{else}}讚{{/if}}</a> (${favorite_count})
-{{if 1 == replurkable}}| <a href="#" class="post-btn-replurk"> 轉噗</a> (${replurkers_count}){{/if}}
+{{if 1 == replurkable}}| <a href="#" class="post-btn-replurk"> {{if 1 == replurked}} 收回轉噗 {{else}} 轉噗 {{/if}}</a> (${replurkers_count}){{/if}}
 </div>
 </div>
 </div>
