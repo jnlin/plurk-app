@@ -67,14 +67,27 @@
 
     // timeline
     var load_timeline = function(offset) {
-        var url = base_url + '/Timeline/getPlurks';
+        var url;
         var filter = $('#root').attr('data-filter');
-        var filters = {
-            '#mine': 'only_user',
-            '#responded': 'only_responded',
-            '#private': 'only_private',
-            '#favorite': 'only_favorite'
-        };
+        var unread = $('#filter-only-unread').prop('checked');
+        var filters;
+        if (unread) {
+            url = base_url + '/Timeline/getUnreadPlurks';
+            filters = {
+                '#mine': 'my',
+                '#responded': 'responded',
+                '#private': 'private',
+                '#favorite': 'favorite'
+            };
+        } else {
+            url = base_url + '/Timeline/getPlurks';
+            filters = {
+                '#mine': 'only_user',
+                '#responded': 'only_responded',
+                '#private': 'only_private',
+                '#favorite': 'only_favorite'
+            };
+        }
         var params = {};
         if (filters[filter]) {
             params.filter = filters[filter];
@@ -268,4 +281,8 @@
         $('#root').attr('data-filter', location.hash);
         load_timeline();
     };
+
+    $('#filter-only-unread').change(function(){
+        load_timeline();
+    });
 })(jQuery);
