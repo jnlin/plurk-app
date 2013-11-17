@@ -34,7 +34,7 @@
     };
 
     var get_avatar = function(user, size) {
-        if (null === size) {
+        if (!size) {
             size = 'medium';
         }
         return user.has_profile_image ? ('http://avatars.plurk.com/' + user.id + '-' + size +
