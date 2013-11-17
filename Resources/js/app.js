@@ -59,6 +59,29 @@
         }, 
             failure: function(data) { console.log("error"); console.log(data); }});
         return false;
+    }).on('click', 'a.post-btn-mute', function(){
+        var $container = $(this).parents('div.post-container').first();
+        var ids = [$container.attr('data-plurkid')];
+        var mute = (2 == $container.attr('data-unread'));
+        var url;
+        if (mute) {
+            url = base_url + '/Timeline/mutePlurks';
+        } else {
+            url = base_url + '/Timeline/unmutePlurks';
+        }
+        oauth.request({
+            method: 'POST',
+            'url': url,
+            data: {'ids': '[' + ids.join(',') + ']'},
+            success: function(data){
+                for (var i in ids) {
+                    $('#timeline').find('div[data-plurkid="' + ids[i] + '"]').attr('data-unread', mute ? '0' : '2').
+                        find('a.post-btn-mute').text(mute ? '消音' : '回音');
+                }
+            },
+            failure: function(data){ onsole.log("error"); console.log(data); }
+        });
+        return false;
     });
 
     oauth.get(url, function(data) {
