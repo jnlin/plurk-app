@@ -57,6 +57,7 @@
                     content: plurk.content,
                     display_name: owner.display_name,
                     favorite_count: plurk.favorite_count,
+                    is_unread: plurk.is_unread,
                     plurk_id: plurk.plurk_id,
                     posted: (new Date(Date.parse(plurk.posted))).toLocaleString(),
                     response_count: plurk.response_count,
