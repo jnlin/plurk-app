@@ -121,7 +121,7 @@ data-plurkid="${plurk_id}" data-unread="${is_unread}" data-favorite="${favorite}
 ${display_name}
 </h4>
 <div class="post-time">
-{{if 1 == private_plurk}} <span class="glyphicon glyphicon-lock"></span> {{/if}} {{if 1 == favorite}} <span class="glyphicon glyphicon-heart"></span> {{/if}} ${posted}
+<span class="glyphicon glyphicon-lock{{if 0 == private_plurk}} hide{{/if}}"></span> <span class="glyphicon glyphicon-heart{{if 0 == favorite}} hide{{/if}}"></span> ${posted}
 </div>
 </div>
 <div style="clear: both">

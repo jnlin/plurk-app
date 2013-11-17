@@ -98,8 +98,9 @@
             data: {'ids': '[' + ids.join(',') + ']'},
             success: function(data){
                 for (var i in ids) {
-                    $('#timeline').find('div[data-plurkid="' + ids[i] + '"]').attr('data-favorite', favorite ? '0' : '1').
-                        find('a.post-btn-favorite').text(favorite ? '讚' : '收回讚');
+                    var plurk = $('#timeline').find('div[data-plurkid="' + ids[i] + '"]').attr('data-favorite', favorite ? '0' : '1');
+                    plurk.find('a.post-btn-favorite').text(favorite ? '讚' : '收回讚');
+                    plurk.find('span.glyphicon-heart').toggleClass('hide');
                 }
             },
             failure: function(data){ onsole.log("error"); console.log(data); }
