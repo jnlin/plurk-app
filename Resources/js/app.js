@@ -46,7 +46,6 @@
         return false;
     });
 
-    var options;
     oauth.get(url, function(data) {
             var posts = new Array();
             data = JSON.parse(data.text);
