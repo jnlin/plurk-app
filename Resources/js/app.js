@@ -4,6 +4,7 @@
     var a_key = '';
     var a_secret = '';
 
+    var base_url = 'https://www.plurk.com/APP';
     var options = {
         consumerKey: c_key,
         consumerSecret: c_secret,
@@ -16,13 +17,13 @@
     localStorage.test = "Hello";
     console.log(localStorage.test);
 
-    var url = 'http://www.plurk.com/APP/Timeline/getPlurks';
+    var url = base_url + '/Timeline/getPlurks';
     var oauth = OAuth(options);
 
     $('#timeline').on('click', 'div.post-content, a.post-btn-reply', function(){
         var $container = $(this).parents('div.post-container').first();
         var id = $container.attr('data-plurkid');
-        var url = 'http://www.plurk.com/APP/Responses/get';
+        var url = base_url + '/Responses/get';
         oauth.request({
             method: 'GET',
             'url': url,
