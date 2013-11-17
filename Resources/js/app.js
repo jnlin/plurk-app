@@ -275,7 +275,6 @@
             'display_name': data.display_name,
             'karma': data.karma,
         };
-        $.tmpl($('#menu'), profile).appendTo('#profile');
         $.tmpl($('#panel-profile'), profile).prependTo('#post-new-panel-head');
 
         $('#root').attr('data-userid', data.id);
