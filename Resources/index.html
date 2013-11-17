@@ -120,7 +120,7 @@
 ${display_name}
 </h4>
 <div class="post-time">
-{{if 1 == private_plurk}} <span class="glyphicon glyphicon-lock"></span> {{/if}} ${posted}
+{{if 1 == private_plurk}} <span class="glyphicon glyphicon-lock"></span> {{/if}} {{if 1 == favorite}} <span class="glyphicon glyphicon-heart"></span> {{/if}} ${posted}
 </div>
 </div>
 <div style="clear: both">
@@ -134,8 +134,8 @@ ${display_name}
 <div class="panel-footer">
 <a href="#" class="post-btn-mute">{{if 2 == is_unread}}回音{{else}}消音{{/if}}</a> |
 <a href="#" class="post-btn-reply">回應 (${response_count})</a> |
-讚 (${favorite_count}) {{if 1 == replurkable}}|
-轉噗 (${replurkers_count}) {{/if}}
+<a href="#" class="post-btn-favorite">{{if 1 == favorite}}收回讚{{else}}讚{{/if}} (${favorite_count})</a>
+{{if 1 == replurkable}}| 轉噗 (${replurkers_count}) {{/if}}
 </div>
 </div>
 </div>

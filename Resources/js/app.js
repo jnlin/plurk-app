@@ -56,6 +56,7 @@
                                 (0 == owner.avatar ? '' : owner.avatar) + '.gif') : 'http://www.plurk.com/static/default_medium.gif',
                     content: plurk.content,
                     display_name: owner.display_name,
+                    favorite: plurk.favorite ? 1 : 0,
                     favorite_count: plurk.favorite_count,
                     is_unread: plurk.is_unread,
                     plurk_id: plurk.plurk_id,
