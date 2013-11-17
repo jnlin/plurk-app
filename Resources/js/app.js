@@ -75,7 +75,7 @@
     }
 
 
-    $('#timeline').on('click', 'div.post-content a', function(){
+    $('#timeline').on('click', 'div.post-content a, div.reply-text a', function(){
         // open url in default browser
         Ti.Platform.openURL($(this).attr('href'));
         return false;
