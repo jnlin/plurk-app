@@ -110,7 +110,7 @@
 </div>
 <script id="post" type="text/html">
 <div class="col-md-12 column">
-<div class="panel {{if 1 == is_unread}} panel-warning{{else}}panel-default{{/if}}">
+<div class="post-container panel {{if 1 == is_unread}} panel-warning{{else}}panel-default{{/if}}" data-plurkid="${plurk_id}">
 <div class="post-header panel-heading media">
 <div class="post-avatar pull-left">
 <img src="${avatar}" class="img-rounded">
@@ -126,7 +126,7 @@ ${display_name}
 <div style="clear: both">
 </div>
 </div>
-<div class="post-content panel-body" data-plurkid="${plurk_id}" style="cursor: pointer;">
+<div class="post-content panel-body" style="cursor: pointer;">
 {{html content}}
 </div>
 <table class="table table-striped post-reply" style="display:none">

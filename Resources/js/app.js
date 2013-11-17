@@ -19,9 +19,9 @@
     var url = 'http://www.plurk.com/APP/Timeline/getPlurks';
     var oauth = OAuth(options);
 
-    $('#timeline').on('click', 'div.post-content', function(){
-        var $this = $(this);
-        var id = $this.attr('data-plurkid');
+    $('#timeline').on('click', 'div.post-content, a.post-btn-reply', function(){
+        var $container = $(this).parents('div.post-container').first();
+        var id = $container.attr('data-plurkid');
         var url = 'http://www.plurk.com/APP/Responses/get';
         oauth.request({
             method: 'GET',
@@ -38,10 +38,11 @@
                     content: response.content
                 });
             }
-            var $reply = $this.parent().find('table.post-reply');
+            var $reply = $container.find('table.post-reply');
             $reply.empty().append($.tmpl($('#reply'), posts)).show();
         }, 
             failure: function(data) { console.log("error"); console.log(data); }});
+        return false;
     });
 
     var options;
