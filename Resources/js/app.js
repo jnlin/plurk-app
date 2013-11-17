@@ -38,7 +38,8 @@
                     content: response.content
                 });
             }
-            $.tmpl($('#reply'), posts).appendTo($this.parent().find('table.post-reply').show());
+            var $reply = $this.parent().find('table.post-reply');
+            $reply.empty().append($.tmpl($('#reply'), posts)).show();
         }, 
             failure: function(data) { console.log("error"); console.log(data); }});
     });
