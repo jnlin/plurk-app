@@ -205,6 +205,12 @@
         return false;
     });
 
+    // refresh
+    $('#btn-refresh').click(function(){
+        load_timeline();
+        return false;
+    });
+
     // menu
     var url = base_url + '/Users/me';
     oauth.get(url , function(data){
