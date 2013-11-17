@@ -82,6 +82,30 @@
             failure: function(data){ onsole.log("error"); console.log(data); }
         });
         return false;
+    }).on('click', 'a.post-btn-favorite', function(){
+        var $container = $(this).parents('div.post-container').first();
+        var ids = [$container.attr('data-plurkid')];
+        var favorite = (1 == $container.attr('data-favorite'));
+        var url;
+        if (favorite) {
+            url = base_url + '/Timeline/favoritePlurks';
+        } else {
+            url = base_url + '/Timeline/unfavoritePlurks';
+        }
+        oauth.request({
+            method: 'POST',
+            'url': url,
+            data: {'ids': '[' + ids.join(',') + ']'},
+            success: function(data){
+                for (var i in ids) {
+                    $('#timeline').find('div[data-plurkid="' + ids[i] + '"]').attr('data-favorite', favorite ? '0' : '1').
+                        find('a.post-btn-favorite').text(favorite ? '讚' : '收回讚');
+                }
+            },
+            failure: function(data){ onsole.log("error"); console.log(data); }
+        });
+        return false;
+
     });
 
     oauth.get(url, function(data) {
