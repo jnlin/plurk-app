@@ -206,9 +206,9 @@
         var replurked = (1 == $container.attr('data-replurked'));
         var url;
         if (replurked) {
-            url = base_url + '/Timeline/replurk';
-        } else {
             url = base_url + '/Timeline/unreplurk';
+        } else {
+            url = base_url + '/Timeline/replurk';
         }
         oauth.request({
             method: 'POST',
