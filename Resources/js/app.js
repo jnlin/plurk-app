@@ -159,6 +159,8 @@
             'url': url,
             data: {'content': text, 'qualifier': ':', 'limited_to': '[0]'},
             success: function(data){
+                load_timeline();
+                $('#post-new-text').val('');
             },
             failure: function(data){ console.log("error"); console.log(data); }
         });
