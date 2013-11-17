@@ -5,6 +5,7 @@
     var a_secret = '';
 
     var base_url = 'https://www.plurk.com/APP';
+    var bind_scroll = false;
     var options = {
         consumerKey: c_key,
         consumerSecret: c_secret,
@@ -136,7 +137,10 @@
                     $('#root').attr('data-latest', (new Date()).toISOString());
                 }
                 $.tmpl($('#post'), posts).appendTo('#timeline');
-                $(window).scroll(load_more_plurks);
+                if (!bind_scroll) {
+                    bind_scroll = true;
+                    $(window).scroll(load_more_plurks);
+                }
                 $('#root').attr('data-offset', oldest);
             },
             failure: function(data) { console.log("error"); console.log(data); }});
@@ -145,6 +149,7 @@
     var load_more_plurks = function(){
         if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
             $(window).unbind('scroll');
+            bind_scroll = false;
             load_timeline($('#root').attr('data-offset'));
         }
     };
