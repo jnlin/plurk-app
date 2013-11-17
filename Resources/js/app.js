@@ -180,7 +180,7 @@
         oauth.request({
             method: 'POST',
             'url': url,
-            data: {'content': text, 'qualifier': ':', 'limited_to': '[' + $('#profile').attr('data-userid') + ']'},
+            data: {'content': text, 'qualifier': ':', 'limited_to': '[' + $('#root').attr('data-userid') + ']'},
             success: function(data){
                 load_timeline();
                 $('#post-new-text').val('');
@@ -202,7 +202,7 @@
         $.tmpl($('#menu'), profile).appendTo('#profile');
         $.tmpl($('#panel-profile'), profile).prependTo('#post-new-panel-head');
 
-        $('#profile').attr('data-userid', data.id);
+        $('#root').attr('data-userid', data.id);
     });
 
     load_timeline();
