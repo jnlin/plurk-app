@@ -156,13 +156,16 @@
         return false;
     }).on('submit', 'form.reply-form', function(){
         var $container = $(this).parents('div.post-container').first();
+        var $input = $(this).find('input.reply-new-text').first();
         var id = $container.attr('data-plurkid');
         url = base_url + '/Responses/responseAdd';
         oauth.request({
             method: 'POST',
             'url': url,
-            data: {'plurk_id': id, content: $(this).find('input.reply-new-text').first().val(), 'qualifier': ':'},
+            data: {'plurk_id': id, content: $input.val(), 'qualifier': ':'},
             success: function(data){
+                load_replies(id);
+                $input.val('');
             },
             failure: function(data){ onsole.log("error"); console.log(data); }
         });
