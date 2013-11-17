@@ -161,7 +161,7 @@
         oauth.request({
             method: 'POST',
             'url': url,
-            data: {'content': text, 'qualifier': ':', 'limited_to': '[0]'},
+            data: {'content': text, 'qualifier': ':', 'limited_to': '[' + $('#profile').attr('data-userid') + ']'},
             success: function(data){
                 load_timeline();
                 $('#post-new-text').val('');
