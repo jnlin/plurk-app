@@ -353,4 +353,6 @@
     $('#filter-only-unread').change(function(){
         load_timeline();
     });
+
+    Ti.UI.getCurrentWindow().setSize(800, 600);
 })(jQuery);
