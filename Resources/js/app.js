@@ -98,6 +98,7 @@
 
                 if (!offset) {
                     $('#timeline').empty();
+                    $('#root').attr('data-latest', (new Date()).toISOString());
                 }
                 $.tmpl($('#post'), posts).appendTo('#timeline');
                 $(window).scroll(load_more_plurks);
@@ -113,7 +114,9 @@
         }
     };
 
-    $('#timeline').on('click', 'div.post-content a, div.reply-text a', function(){
+    $('#timeline').on('click', '#new-plurk-content', function(){
+        load_timeline();
+    }).on('click', 'div.post-content a, div.reply-text a', function(){
         // open url in default browser
         Ti.Platform.openURL($(this).attr('href'));
         return false;
@@ -227,4 +230,21 @@
     });
 
     load_timeline();
+
+    // check new plurk
+    setInterval(function(){
+        oauth.request({
+            url: base_url + '/Polling/getUnreadCount',
+            method: 'GET',
+            data: {},
+            success: function(data){
+                data = JSON.parse(data.text);
+                if (data.plurks.length > 0) {
+                    $('#new-plurk-content').remove();
+                    $.tmpl($('#new-plurk'), {'all': data.plurks.length}).prependTo('#timeline');
+                }
+            },
+            failure: function(data){ console.log("error"); console.log(data); }
+        });
+    }, 2 * 60 * 1000);
 })(jQuery);
