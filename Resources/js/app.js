@@ -75,7 +75,11 @@
     }
 
 
-    $('#timeline').on('click', 'div.post-content, a.post-btn-reply', function(){
+    $('#timeline').on('click', 'div.post-content a', function(){
+        // open url in default browser
+        Ti.Platform.openURL($(this).attr('href'));
+        return false;
+    }).on('click', 'div.post-content, a.post-btn-reply', function(){
         var $container = $(this).parents('div.post-container').first();
         var id = $container.attr('data-plurkid');
         var url = base_url + '/Responses/get';
