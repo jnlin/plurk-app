@@ -200,6 +200,30 @@
             failure: function(data){ onsole.log("error"); console.log(data); }
         });
         return false;
+    }).on('click', 'a.post-btn-replurk', function(){
+        var $container = $(this).parents('div.post-container').first();
+        var ids = [$container.attr('data-plurkid')];
+        var replurked = (1 == $container.attr('data-replurked'));
+        var url;
+        if (replurked) {
+            url = base_url + '/Timeline/replurk';
+        } else {
+            url = base_url + '/Timeline/unreplurk';
+        }
+        oauth.request({
+            method: 'POST',
+            'url': url,
+            data: {'ids': '[' + ids.join(',') + ']'},
+            success: function(data){
+                for (var i in ids) {
+                    var plurk = $('#timeline').find('div[data-plurkid="' + ids[i] + '"]').attr('data-replurked', replurked ? '0' : '1');
+                    plurk.find('a.post-btn-replurk').text(replurked ? '轉噗' : '收回轉噗');
+                }
+            },
+            failure: function(data){ onsole.log("error"); console.log(data); }
+        });
+        return false;
+
     }).on('submit', 'form.reply-form', function(){
         var $container = $(this).parents('div.post-container').first();
         var $input = $(this).find('input.reply-new-text').first();
