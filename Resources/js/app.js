@@ -234,9 +234,9 @@
     // check new plurk
     setInterval(function(){
         oauth.request({
-            url: base_url + '/Polling/getUnreadCount',
+            url: base_url + '/Polling/getPlurks',
             method: 'GET',
-            data: {},
+            data: {offset: $('#root').attr('data-latest')},
             success: function(data){
                 data = JSON.parse(data.text);
                 if (data.plurks.length > 0) {
