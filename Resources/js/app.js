@@ -52,8 +52,8 @@
                 var plurk = data.plurks[i];
                 var owner = data.plurk_users[plurk.owner_id];
                 posts.push({
-                    avatar: owner.has_profile_image ? ('http://avatars.plurk.com/' + plurk.owner_id + '-medium' + owner.avatar + '.gif') :
-                        'http://www.plurk.com/static/default_medium.gif',
+                    avatar: owner.has_profile_image ? ('http://avatars.plurk.com/' + plurk.owner_id + '-medium' +
+                                (0 == owner.avatar ? '' : owner.avatar) + '.gif') : 'http://www.plurk.com/static/default_medium.gif',
                     content: plurk.content,
                     display_name: owner.display_name,
                     favorite_count: plurk.favorite_count,
