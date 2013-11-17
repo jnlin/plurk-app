@@ -68,10 +68,24 @@
     // timeline
     var load_timeline = function(offset) {
         var url = base_url + '/Timeline/getPlurks';
+        var filter = $('#root').attr('data-filter');
+        var filters = {
+            '#mine': 'only_user',
+            '#responded': 'only_responded',
+            '#private': 'only_private',
+            '#favorite': 'only_favorite'
+        };
+        var params = {};
+        if (filters[filter]) {
+            params.filter = filters[filter];
+        }
+        if (offset) {
+            params.offset = offset;
+        }
         oauth.request({
             method: 'GET',
             'url': url,
-            data: offset ? {'offset': offset} : {},
+            data: params,
             success: function(data){
                 var posts = new Array();
                 var oldest;
@@ -247,4 +261,11 @@
             failure: function(data){ console.log("error"); console.log(data); }
         });
     }, 2 * 60 * 1000);
+
+    // on hash change
+    window.onhashchange = function()
+    {
+        $('#root').attr('data-filter', location.hash);
+        load_timeline();
+    };
 })(jQuery);
