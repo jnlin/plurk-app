@@ -60,6 +60,7 @@
                     is_unread: plurk.is_unread,
                     plurk_id: plurk.plurk_id,
                     posted: (new Date(Date.parse(plurk.posted))).toLocaleString(),
+                    private_plurk: null === plurk.limited_to ? 0 : 1,
                     response_count: plurk.response_count,
                     replurkers_count: plurk.replurkers_count,
                     replurkable: plurk.replurkable
