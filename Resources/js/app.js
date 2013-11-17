@@ -17,7 +17,6 @@
     localStorage.test = "Hello";
     console.log(localStorage.test);
 
-    var url = base_url + '/Timeline/getPlurks';
     var oauth = OAuth(options);
 
     var mark_as_read = function(ids) {
@@ -117,6 +116,21 @@
 
     });
 
+    // menu
+    var url = base_url + '/Users/me';
+    oauth.get(url , function(data){
+        data = JSON.parse(data.text);
+        $.tmpl($('#menu'), {
+            'avatar': get_avatar(data),
+            'display_name': data.display_name,
+            'karma': data.karma,
+        }).appendTo('#profile');
+
+        $('#profile').attr('data-userid', data.id);
+    });
+
+    // timeline
+    var url = base_url + '/Timeline/getPlurks';
     oauth.get(url, function(data) {
             var posts = new Array();
             data = JSON.parse(data.text);
