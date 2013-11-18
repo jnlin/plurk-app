@@ -275,6 +275,12 @@
         return false;
     });
 
+    // logout
+    $('#btn-logout').click(function(){
+        localStorage.clear();
+        Ti.App.exit();
+    });
+
     // menu
     var url = base_url + '/Users/me';
     oauth.get(url , function(data){
