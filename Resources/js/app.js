@@ -387,6 +387,8 @@
     window.onhashchange = function()
     {
         $('#root').attr('data-filter', location.hash);
+        $('a.filter').find('span').addClass('hidden');
+        $('a.filter[href="' + location.hash + '"]').find('span').removeClass('hidden');
         load_timeline();
     };
 
