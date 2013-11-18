@@ -345,6 +345,7 @@
             success: function(data) {
                 var token = oauth.parseTokenRequest(data, data.responseHeaders['Content-Type'] || undefined);
                 oauth.setAccessToken([token.oauth_token, token.oauth_token_secret]);
+                oauth.setVerifier('');
                 localStorage.access_key = token.oauth_token;
                 localStorage.access_token = token.oauth_token_secret
             }, failure: function(data) { console.log('error'); console.log(data.text); }
