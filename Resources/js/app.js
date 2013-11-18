@@ -1,22 +1,18 @@
 (function($, undefined){
-    var c_key = '';
-    var c_secret = '';
-    var a_key = '';
-    var a_secret = '';
+    var c_key = 'kqLXG7kuozbA';
+    var c_secret = 'D5gP8qqozYJJ15wKYEPHQwvbXojWql5R';
+    var a_key = localStorage.access_key;
+    var a_secret = localStorage.access_token;
 
     var base_url = 'https://www.plurk.com/APP';
     var bind_scroll = false;
+
     var options = {
         consumerKey: c_key,
         consumerSecret: c_secret,
         accessTokenKey: a_key,
         accessTokenSecret: a_secret,
     };
-
-    console.log(localStorage.test);
-
-    localStorage.test = "Hello";
-    console.log(localStorage.test);
 
     var oauth = OAuth(options);
 
@@ -323,6 +319,37 @@
         });
     };
 
+    Ti.UI.getCurrentWindow().setSize(800, 600);
+
+    if (!(a_key && a_secret)) {
+        alert("請先登入噗浪。");
+        var request_params;
+        oauth.request({
+            method: 'GET',
+            url: 'https://www.plurk.com/OAuth/request_token',
+            async: false,
+            success: function(data) {
+                request_params = oauth.parseTokenRequest(data, data.responseHeaders['Content-Type'] || undefined);
+                var url = 'https://www.plurk.com/OAuth/authorize?' + data.text;
+                Ti.Platform.openURL(url);
+            }
+        });
+        var code = prompt("請輸入認證碼");
+        request_params.oauth_verifier = code;
+        oauth.setAccessToken([request_params.oauth_token, request_params.oauth_token_secret]);
+        oauth.setVerifier(code);
+        oauth.request({
+            url: 'https://www.plurk.com/OAuth/access_token',
+            method: 'POST',
+            async: false,
+            success: function(data) {
+                var token = oauth.parseTokenRequest(data, data.responseHeaders['Content-Type'] || undefined);
+                oauth.setAccessToken([token.oauth_token, token.oauth_token_secret]);
+                localStorage.access_key = token.oauth_token;
+                localStorage.access_token = token.oauth_token_secret
+            }, failure: function(data) { console.log('error'); console.log(data.text); }
+        });
+    }
     update_cliques();
     load_timeline();
 
@@ -354,5 +381,4 @@
         load_timeline();
     });
 
-    Ti.UI.getCurrentWindow().setSize(800, 600);
 })(jQuery);
