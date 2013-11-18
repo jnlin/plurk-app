@@ -27,7 +27,7 @@
                     $('#timeline').find('div[data-plurkid="' + ids[i] + '"]').removeClass('panel-warning').addClass('panel-default');
                 }
             },
-            failure: function(data){ onsole.log("error"); console.log(data); }});
+            failure: function(data){ console.log("error"); console.log(data); }});
     };
 
     var load_replies = function(id){
@@ -181,7 +181,7 @@
                         find('a.post-btn-mute').text(mute ? '消音' : '回音');
                 }
             },
-            failure: function(data){ onsole.log("error"); console.log(data); }
+            failure: function(data){ console.log("error"); console.log(data); }
         });
         return false;
     }).on('click', 'a.post-btn-favorite', function(){
@@ -205,7 +205,7 @@
                     plurk.find('span.glyphicon-heart').toggleClass('hide');
                 }
             },
-            failure: function(data){ onsole.log("error"); console.log(data); }
+            failure: function(data){ console.log("error"); console.log(data); }
         });
         return false;
     }).on('click', 'a.post-btn-replurk', function(){
@@ -228,7 +228,7 @@
                     plurk.find('a.post-btn-replurk').text(replurked ? '轉噗' : '收回轉噗');
                 }
             },
-            failure: function(data){ onsole.log("error"); console.log(data); }
+            failure: function(data){ console.log("error"); console.log(data); }
         });
         return false;
 
@@ -245,7 +245,7 @@
                 load_replies(id);
                 $input.val('');
             },
-            failure: function(data){ onsole.log("error"); console.log(data); }
+            failure: function(data){ console.log("error"); console.log(data); }
         });
         return false;
     }).on('click', 'span.post-reply-hide', function(){
