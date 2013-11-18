@@ -277,8 +277,12 @@
 
     // logout
     $('#btn-logout').click(function(){
-        localStorage.clear();
-        Ti.App.exit();
+        if (confirm('確定要登出嗎？')) {
+            localStorage.clear();
+            setTimeout(function(){
+                Ti.App.exit();
+            }, 2000);
+        }
     });
 
     // menu
