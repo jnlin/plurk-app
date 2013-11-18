@@ -48,7 +48,7 @@
                 });
             }
             var $reply = $('#timeline').find('div[data-plurkid="' + id + '"] table.post-reply');
-            $reply.empty().append($.tmpl($('#reply'), posts)).show();
+            $reply.empty().append($.tmpl($('#reply'), posts)).parent().show();
             mark_as_read([id]);
         },
             failure: function(data) { console.log("error"); console.log(data); }});

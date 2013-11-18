@@ -126,14 +126,17 @@ ${display_name}
 </div>
 <div class="post-content panel-body" style="cursor: pointer;">
 {{html content}}
-</div>
-<table class="table table-striped post-reply" style="display:none">
+<br><br>
+<div style="overflow: scroll; max-height: 150px; display:none">
+<table class="table table-striped post-reply">
 </table>
+</div>
 <form role="form" class="reply-form">
 <div class="form-group">
 <input type="text" class="form-control reply-new-text" placeholder="我要回覆...">
 </div> <button type="submit" class="btn btn-primary">發送</button>
 </form>
+</div>
 <div class="panel-footer">
 <a href="#" class="post-btn-mute">{{if 2 == is_unread}}回音{{else}}消音{{/if}}</a> |
 <a href="#" class="post-btn-reply">回應</a> (${response_count}) |
