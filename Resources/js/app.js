@@ -320,7 +320,6 @@
                     'data': {'clique_name': data[i]},
                     'async': false,
                     'success': function(data){
-                        console.log(i);
                         data = JSON.parse(data.text);
                         for (var j in data) {
                             clique_members[i][data[j].id + ''] = true;

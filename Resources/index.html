@@ -107,7 +107,7 @@
 </script>
 <script id="post" type="text/html">
 <div class="col-md-12 column">
-<div class="post-container panel {{if 1 == is_unread}} panel-warning{{else}}panel-default{{/if}}"
+<div class="post-container panel panel-default"
 data-plurkid="${plurk_id}" data-unread="${is_unread}" data-favorite="${favorite}" data-replurked="${replurked}">
 <div class="post-header panel-heading media">
 <div class="post-avatar pull-left">
@@ -143,10 +143,10 @@ ${display_name}
 </form>
 </div>
 <div class="panel-footer">
-<a href="#" class="post-btn-mute">{{if 2 == is_unread}}回音{{else}}消音{{/if}}</a> |
-<a href="#" class="post-btn-reply">回應</a> (${response_count}) |
-<a href="#" class="post-btn-favorite">{{if 1 == favorite}}收回讚{{else}}讚{{/if}}</a> (${favorite_count})
-{{if 1 == replurkable}}| <a href="#" class="post-btn-replurk"> {{if 1 == replurked}} 收回轉噗 {{else}} 轉噗 {{/if}}</a> (${replurkers_count}){{/if}}
+<span><a href="#" class="post-btn-mute">{{if 2 == is_unread}}回音{{else}}消音{{/if}}</a></span> |
+<span{{if 1 == is_unread}} style="font-weight: bold"{{/if}}><a href="#" class="post-btn-reply">回應</a> (${response_count})</span> |
+<span><a href="#" class="post-btn-favorite">{{if 1 == favorite}}收回讚{{else}}讚{{/if}}</a> (${favorite_count}) </span>
+{{if 1 == replurkable}}| <span> <a href="#" class="post-btn-replurk"> {{if 1 == replurked}} 收回轉噗 {{else}} 轉噗 {{/if}}</a> (${replurkers_count}){{/if}} </span>
 </div>
 </div>
 </div>
