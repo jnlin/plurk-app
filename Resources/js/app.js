@@ -369,11 +369,8 @@
             }, failure: function(data) { console.log('error'); console.log(data.text); }
         });
     }
-    update_cliques();
-    load_timeline();
 
-    // check new plurk
-    setInterval(function(){
+    var polling = function(){
         oauth.request({
             url: base_url + '/Polling/getPlurks',
             method: 'GET',
@@ -387,7 +384,29 @@
             },
             failure: function(data){ console.log("error"); console.log(data); }
         });
-    }, 2 * 60 * 1000);
+
+        oauth.request({
+            url: base_url + '/Polling/getUnreadCount',
+            method: 'GET',
+            data: {},
+            success: function(data){
+                data = JSON.parse(data.text);
+                $('#all-unread').text('(' + data.all + ')');
+                $('#mime-unread').text('(' + data.my + ')');
+                $('#private-unread').text('(' + data['private'] + ')');
+                $('#responded-unread').text('(' + data.responded + ')');
+                $('#favorite-unread').text('(' + data.favorite + ')');
+            },
+            failure: function(data){ console.log("error"); console.log(data); }
+        });
+    };
+
+    update_cliques();
+    load_timeline();
+    polling();
+
+    // check new plurk
+    setInterval(polling, 2 * 60 * 1000);
 
     // on hash change
     window.onhashchange = function()
