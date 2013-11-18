@@ -66,7 +66,7 @@
     var load_timeline = function(offset) {
         var url;
         var filter = $('#root').attr('data-filter');
-        var unread = $('#filter-only-unread').prop('checked');
+        var unread = ("1" == $('#filter-only-unread').attr('data-set'));
         var filters;
         if (unread) {
             url = base_url + '/Timeline/getUnreadPlurks';
@@ -390,8 +390,10 @@
         load_timeline();
     };
 
-    $('#filter-only-unread').change(function(){
+    $('#filter-only-unread').click(function(){
+        $(this).attr('data-set', "1" == $(this).attr('data-set') ? 0 : 1).find('span').toggleClass('hidden');
         load_timeline();
+        return false;
     });
 
 })(jQuery);
