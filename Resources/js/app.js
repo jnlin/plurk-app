@@ -258,7 +258,7 @@
         oauth.request({
             method: 'POST',
             'url': url,
-            data: {'content': text, 'qualifier': ':', 'limited_to': '[' + $('#root').attr('data-userid') + ']'},
+            data: {'content': text, 'qualifier': ':'},
             success: function(data){
                 load_timeline();
                 $('#post-new-text').val('');
