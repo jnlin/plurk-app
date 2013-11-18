@@ -124,12 +124,17 @@ ${display_name}
 <div style="clear: both">
 </div>
 </div>
-<div class="post-content panel-body" style="cursor: pointer;">
+<div class="panel-body">
+<div class="post-content" style="cursor: pointer;">
 {{html content}}
+</div>
 <br><br>
-<div style="overflow: scroll; max-height: 150px; display:none">
+<div style="display:none" class="post-reply-div">
+<div class="pull-right"><span class="glyphicon glyphicon-remove post-reply-hide"></span></div>
+<div style="overflow: scroll; max-height: 300px;">
 <table class="table table-striped post-reply">
 </table>
+</div>
 </div>
 <form role="form" class="reply-form">
 <div class="form-group">
