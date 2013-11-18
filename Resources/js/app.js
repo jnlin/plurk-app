@@ -39,15 +39,17 @@
             success: function(data) {
             var posts = new Array();
             data = JSON.parse(data.text);
+            var $plurk = $('#timeline').find('div[data-plurkid="' + id + '"]');
+            var $reply = $plurk.find('table.post-reply');
             for (var i in data.responses) {
                 var response = data.responses[i];
                 var owner = data.friends[response.user_id];
                 posts.push({
+                    content: response.content,
                     display_name: owner.display_name,
-                    content: response.content
+                    is_owner: owner.id == $plurk.attr('data-owner') ? 1 : 0
                 });
             }
-            var $reply = $('#timeline').find('div[data-plurkid="' + id + '"] table.post-reply');
             $reply.empty().append($.tmpl($('#reply'), posts)).parent().parent().show();
             mark_as_read([id]);
         },
@@ -120,6 +122,7 @@
                         is_owner: owner.id == $('#root').attr('data-userid') ? 1 : 0,
                         is_friend: 0,
                         is_fan: 1,
+                        owner_id: owner.id,
                         plurk_id: plurk.plurk_id,
                         posted: (new Date(Date.parse(plurk.posted))).toLocaleString(),
                         private_plurk: null === plurk.limited_to ? 0 : 1,

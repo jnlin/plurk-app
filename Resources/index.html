@@ -108,7 +108,7 @@
 <script id="post" type="text/html">
 <div class="col-md-12 column">
 <div class="post-container panel {{if 1 == is_owner}} panel-success {{/if}} {{if 1 == is_friend}} panel-info {{/if}} {{if 1 == is_fan}} panel-default {{/if}}"
-data-plurkid="${plurk_id}" data-unread="${is_unread}" data-favorite="${favorite}" data-replurked="${replurked}">
+data-plurkid="${plurk_id}" data-unread="${is_unread}" data-favorite="${favorite}" data-replurked="${replurked}" data-owner="${owner_id}">
 <div class="post-header panel-heading media">
 <div class="post-avatar pull-left">
 <img src="${avatar}" class="img-rounded">
@@ -152,8 +152,8 @@ ${display_name}
 </div>
 </script>
 <script id="reply" type="text/html">
-<tr class="reply-row">
-<td class="reply-content"><p><span class="reply-displayname"> ${display_name} </span> <span class="reply-text"> {{html content}} </span></p></td>
+<tr class="reply-row {{if 1 == is_owner}}success{{/if}}">
+<td class="reply-content"><p><span class="reply-displayname"{{if 0 == is_owner}} style="font-weight: bold"{{/if}}> ${display_name} </span> <span class="reply-text"> {{html content}} </span></p></td>
 </tr>
 </script>
 	<script type="text/javascript" src="js/app.js"></script>
