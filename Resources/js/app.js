@@ -346,7 +346,7 @@
                 Ti.Platform.openURL(url);
             }
         });
-        var code = prompt("請輸入認證碼");
+        var code = prompt("Code");
         request_params.oauth_verifier = code;
         oauth.setAccessToken([request_params.oauth_token, request_params.oauth_token_secret]);
         oauth.setVerifier(code);
