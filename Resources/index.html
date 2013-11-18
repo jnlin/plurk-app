@@ -107,7 +107,7 @@
 </script>
 <script id="post" type="text/html">
 <div class="col-md-12 column">
-<div class="post-container panel panel-default"
+<div class="post-container panel {{if 1 == is_owner}} panel-success {{/if}} {{if 1 == is_friend}} panel-info {{/if}} {{if 1 == is_fan}} panel-default {{/if}}"
 data-plurkid="${plurk_id}" data-unread="${is_unread}" data-favorite="${favorite}" data-replurked="${replurked}">
 <div class="post-header panel-heading media">
 <div class="post-avatar pull-left">
