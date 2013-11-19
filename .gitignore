@@ -2,3 +2,4 @@ dist
 tmp
 packages
 *.swp
+.DS_Store
