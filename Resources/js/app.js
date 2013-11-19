@@ -262,18 +262,19 @@
 
     // post new plurk
     $('#post-new-form').submit(function(){
-        var text = $('#post-new-text').val();
+        var $text = $('#post-new-text');
         var url = base_url + '/Timeline/plurkAdd';
+        $text.prop('disabled', true);
 
         oauth.request({
             method: 'POST',
             'url': url,
-            data: {'content': text, 'qualifier': ':'},
+            data: {'content': $text.val(), 'qualifier': ':'},
             success: function(data){
                 load_timeline();
-                $('#post-new-text').val('');
+                $text.val('').prop('disabled', false);
             },
-            failure: function(data){ console.log("error"); console.log(data); }
+            failure: function(data){ console.log("error"); console.log(data); alert('發噗失敗，請稍候再試'); $text.prop('disabled', false);}
         });
         return false;
     });
