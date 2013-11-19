@@ -158,7 +158,7 @@
 
     $('#timeline').on('click', '#new-plurk-content', function(){
         load_timeline();
-    }).on('click', 'div.post-content a, div.reply-text a', function(){
+    }).on('click', 'div.post-content a, span.reply-text a', function(){
         // open url in default browser
         Ti.Platform.openURL($(this).attr('href'));
         return false;
@@ -385,11 +385,9 @@
             failure: function(data){ console.log("error"); console.log(data); }
         });
 
-        oauth.request({
-            url: base_url + '/Polling/getUnreadCount',
-            method: 'GET',
-            data: {},
-            success: function(data){
+        oauth.get(
+            base_url + '/Polling/getUnreadCount',
+            function(data){
                 data = JSON.parse(data.text);
                 $('#all-unread').text('(' + data.all + ')');
                 $('#mime-unread').text('(' + data.my + ')');
@@ -397,23 +395,23 @@
                 $('#responded-unread').text('(' + data.responded + ')');
                 $('#favorite-unread').text('(' + data.favorite + ')');
             },
-            failure: function(data){ console.log("error"); console.log(data); }
-        });
+            function(data){ console.log("error"); console.log(data); }
+        );
     };
 
     update_cliques();
     load_timeline();
-    polling();
 
     // check new plurk
     setInterval(polling, 2 * 60 * 1000);
+    setTimeout(polling, 5000);
 
     // on hash change
     window.onhashchange = function()
     {
         $('#root').attr('data-filter', location.hash);
-        $('a.filter').find('span').addClass('hidden');
-        $('a.filter[href="' + location.hash + '"]').find('span').removeClass('hidden');
+        $('a.filter').find('span.glyphicon-ok').addClass('hidden');
+        $('a.filter[href="' + location.hash + '"]').find('span.glyphicon-ok').removeClass('hidden');
         load_timeline();
     };
 
