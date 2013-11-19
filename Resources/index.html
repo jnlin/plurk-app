@@ -68,29 +68,6 @@
 			</nav>
 		</div>
 	</div>
-        <div class="row clearfix" id="post-new-panel">
-        <div class="col-md-12 column">
-        <div class="panel panel-warning">
-        <div class="panel-heading media" id="post-new-panel-head">
-        <script type="text/html" id="panel-profile">
-        <div class="post-avatar pull-left">
-        <img src="${avatar}" class="img-rounded">
-        </div>
-        <div class="post-owner media-body">
-        <h4 class="media-heading">
-        ${display_name}
-        </h4>
-        </div>
-        </script>
-        <form id="post-new-form" role="form">
-        <div class="form-group">
-        <input type="text" class="form-control" id="post-new-text" placeholder="我要發噗...">
-        </div> <button type="submit" class="btn btn-primary">發送</button>
-        </form>
-        </div>
-        </div>
-        </div>
-        </div>
 	<div class="row clearfix" id="timeline">
 	</div>
         <div class="row clearfix">
@@ -99,6 +76,18 @@
         <div class="progress-bar"  role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%">
         </div>
         </div>
+        </div>
+        </div>
+        <div class="navbar navbar-default navbar-fixed-bottom" style="background-color: #FCF8E3; border-color: #FAEBCC; color: #C09853;">
+        <div class="container" id="post-new-panel">
+        <script type="text/html" id="panel-profile">
+        <img src="${avatar}" class="img-rounded"> <h4 style="display: inline"> ${display_name} </h4>
+        </script>
+        <form id="post-new-form" class="form-inline" role="form" style="display: inline-block">
+        <div class="form-group">
+        <input type="text" class="form-control" id="post-new-text" placeholder="我要發噗..." size="60">
+        </div> <button type="submit" class="btn btn-primary">發送</button>
+        </form>
         </div>
         </div>
 </div>

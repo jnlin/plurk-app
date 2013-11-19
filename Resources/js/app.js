@@ -305,7 +305,7 @@
             'display_name': data.display_name,
             'karma': data.karma,
         };
-        $.tmpl($('#panel-profile'), profile).prependTo('#post-new-panel-head');
+        $.tmpl($('#panel-profile'), profile).prependTo('#post-new-panel');
 
         $('#root').attr('data-userid', data.id);
     });
