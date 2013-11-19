@@ -243,15 +243,16 @@
         var $input = $(this).find('input.reply-new-text').first();
         var id = $container.attr('data-plurkid');
         url = base_url + '/Responses/responseAdd';
+        $input.prop('disabled', true);
         oauth.request({
             method: 'POST',
             'url': url,
             data: {'plurk_id': id, content: $input.val(), 'qualifier': ':'},
             success: function(data){
                 load_replies(id);
-                $input.val('');
+                $input.val('').prop('disabled', false);
             },
-            failure: function(data){ console.log("error"); console.log(data); }
+            failure: function(data){ console.log("error"); console.log(data); alert('回應失敗，請稍候再試'); $input.prop('disabled', false); }
         });
         return false;
     }).on('click', 'span.post-reply-hide', function(){
