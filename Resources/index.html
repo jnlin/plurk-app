@@ -131,11 +131,13 @@ ${display_name}
 </table>
 </div>
 </div>
-<form role="form" class="reply-form">
+<div class="container">
+<form role="form" class="reply-form form-inline">
 <div class="form-group">
-<input type="text" class="form-control input-sm reply-new-text" placeholder="我要回覆...">
-</div> <button type="submit" class="btn btn-primary">發送</button>
+<input type="text" class="form-control input-sm reply-new-text" placeholder="我要回覆..." size="100">
+</div> <button type="submit" class="btn btn-primary btn-sm">發送</button>
 </form>
+</div>
 </div>
 <div class="panel-footer">
 <span><a href="#" class="post-btn-mute">{{if 2 == is_unread}}回音{{else}}消音{{/if}}</a></span> |
