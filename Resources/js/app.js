@@ -314,6 +314,8 @@
         $.tmpl($('#panel-profile'), profile).prependTo('#post-new-panel');
 
         $('#root').attr('data-userid', data.id);
+        $('#root').attr('data-friends-count', data.friends_count);
+        update_friends();
     });
 
     // cliques
