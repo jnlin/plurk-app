@@ -65,6 +65,7 @@
     };
 
     // timeline
+    var timeline = [];
     var load_timeline = function(offset) {
         var url;
         var filter = $('#root').attr('data-filter');
@@ -105,6 +106,7 @@
                 var posts = new Array();
                 var oldest;
                 var filter_users = null;
+                timeline = [];
                 data = JSON.parse(data.text);
                 if (filter && filter.match(/^#clique-/)) {
                     filter_users = clique_members[filter.split('-')[1]];
@@ -136,6 +138,7 @@
                         replurked: plurk.replurked ? 1 : 0,
                         replurkers_count: plurk.replurkers_count
                     });
+                    timeline.push(plurk.plurk_id);
                     oldest = (new Date(Date.parse(plurk.posted))).toISOString();
                 }
 
@@ -265,6 +268,12 @@
         return false;
     }).on('click', 'span.post-reply-hide', function(){
         $(this).parent().parent().hide();
+        return false;
+    });
+
+    // mark as read
+    $('#btn-markasread').click(function(){
+        mark_as_read(timeline);
         return false;
     });
 
