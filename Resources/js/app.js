@@ -93,7 +93,10 @@
         }
         if (offset) {
             params.offset = offset;
+        } else {
+            $('#timeline').empty();
         }
+        $('#no-more').hide();
         oauth.request({
             method: 'GET',
             'url': url,
@@ -137,6 +140,9 @@
                 if (!offset) {
                     $('#timeline').empty();
                     $('#root').attr('data-latest', (new Date()).toISOString());
+                }
+                if (posts.length <= 0) {
+                    $('#no-more').show();
                 }
                 $.tmpl($('#post'), posts).appendTo('#timeline');
                 if (!bind_scroll) {
