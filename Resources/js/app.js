@@ -282,11 +282,15 @@
         var $text = $('#post-new-text');
         var url = base_url + '/Timeline/plurkAdd';
         $text.prop('disabled', true);
+        var request = {'content': $text.val(), 'qualifier': ':'};
+        if ($('#post-private').prop('checked')) {
+            request.limited_to = '[0]';
+        }
 
         oauth.request({
             method: 'POST',
             'url': url,
-            data: {'content': $text.val(), 'qualifier': ':'},
+            data: request,
             success: function(data){
                 load_timeline();
                 $text.val('').prop('disabled', false);
