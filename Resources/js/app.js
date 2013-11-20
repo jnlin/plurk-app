@@ -345,6 +345,36 @@
         });
     };
 
+    // friends
+    var friends = [];
+    var friends_hash = {};
+    var update_friends = function() {
+        var url = base_url + '/FriendsFans/getFriendsByOffset';
+        var offset = 0;
+        var done = false;
+        friends = [];
+        friends_hash = {};
+        while (!done) {
+            oauth.request({
+                'url': url,
+                'method': 'GET',
+                'data': {'user_id': $('#root').attr('data-userid'), 'offset': offset + '', 'limit': '100'},
+                'async': false,
+                'success': function(data){
+                    data = JSON.parse(data.text);
+                    friends = friends.concat(data);
+                    if (offset > $('#root').attr('data-friends-count')) {
+                        done = true;
+                    }
+                    offset += 100;
+            }, failure: function(data){ console.log('error'); console.log(data); done = true;}});
+        }
+
+        for (var i in friends) {
+            friends_hash[friends[i].id + ''] = true;
+        }
+    };
+
     Ti.UI.getCurrentWindow().setSize(800, 600);
 
     if (!(a_key && a_secret)) {
