@@ -106,7 +106,9 @@
                 var posts = new Array();
                 var oldest;
                 var filter_users = null;
-                timeline = [];
+                if (!offset) {
+                    timeline = [];
+                }
                 data = JSON.parse(data.text);
                 if (filter && filter.match(/^#clique-/)) {
                     filter_users = clique_members[filter.split('-')[1]];
