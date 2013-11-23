@@ -71,6 +71,7 @@
         var url;
         var filter = $('#root').attr('data-filter');
         var unread = ("1" == $('#filter-only-unread').attr('data-set'));
+        var params = {};
         var user_id;
         var filters;
         if (filter && filter.match(/^#userid-/)) {
@@ -85,7 +86,8 @@
                 '#favorite': 'favorite'
             };
         } else if (user_id) {
-            url = base_url + '/Timeline/getPublicPlurks?user_id=' + user_id;
+            url = base_url + '/Timeline/getPublicPlurks';
+            params.user_id = user_id;
             filters = {};
         } else {
             url = base_url + '/Timeline/getPlurks';
@@ -96,7 +98,6 @@
                 '#favorite': 'only_favorite'
             };
         }
-        var params = {};
         if (filters[filter]) {
             params.filter = filters[filter];
         }
