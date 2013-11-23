@@ -362,6 +362,8 @@
 
     $('#upload-file').submit(function(){
         var url = base_url + '/Timeline/uploadPicture';
+        var $btn = $(this).find('button');
+        $btn.prop('disabled', true);
 
         oauth.request({
             method: 'POST',
@@ -371,8 +373,9 @@
                 data = JSON.parse(data.text);
                 console.log(data);
                 $('#post-new-text').val($('#post-new-text').val() + data.full);
+                $btn.prop('disabled', false);
             },
-            failure: function(data){ console.log("error"); console.log(data); alert('上傳失敗，請稍候再試');}
+            failure: function(data){ console.log("error"); console.log(data); alert('上傳失敗，請稍候再試');$btn.prop('disabled', false);}
         });
 
         return false;
