@@ -275,7 +275,7 @@
     }).on('click', 'a.post-btn-quote', function(){
         var $container = $(this).parents('div.post-container').first();
         var id = $container.attr('data-plurkid');
-        $('#post-new-text').val('http://www.plurk.com/p/' + parseInt(id).toString(36));
+        $('#post-new-text').val('[轉] http://www.plurk.com/p/' + parseInt(id).toString(36));
         return false;
     }).on('click', 'a.post-btn-delete', function(){
         var $container = $(this).parents('div.post-container').first();
