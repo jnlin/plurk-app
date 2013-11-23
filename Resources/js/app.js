@@ -336,6 +336,7 @@
     $('#btn-refresh').click(function(){
         load_timeline();
         update_cliques();
+        polling();
         return false;
     });
 
