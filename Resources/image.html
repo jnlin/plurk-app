@@ -21,6 +21,9 @@ $(function(){
     var url = location.hash;
     url = url.replace(/^#/, '');
     $.tmpl($('#image'), {'url': url}).appendTo($('body'));
+    $('body').on('a', 'click', function(){
+        Ti.Platform.openURL($(this).attr('href'));
+    });
 });
 </script>
 </body>
