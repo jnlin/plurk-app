@@ -157,7 +157,7 @@
                     $('#timeline').empty();
                     $('#root').attr('data-latest', (new Date()).toISOString());
                 }
-                if (posts.length <= 0) {
+                if (unread && posts.length <= 0) {
                     $('#no-more').show();
                 }
                 $.tmpl($('#post'), posts).appendTo('#timeline');
