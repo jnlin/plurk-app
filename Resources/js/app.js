@@ -16,7 +16,7 @@
 
     var oauth = OAuth(options);
 
-    var mark_as_read = function(ids) {
+    var mark_as_read = function(ids, callback) {
         var url = base_url + '/Timeline/markAsRead';
         oauth.request({
             method: 'POST',
@@ -25,6 +25,9 @@
             success: function(data){
                 for (var i in ids) {
                     $('#timeline').find('div[data-plurkid="' + ids[i] + '"]').removeClass('panel-warning').addClass('panel-default');
+                }
+                if (callback) {
+                    callback();
                 }
             },
             failure: function(data){ console.log("error"); console.log(data); }});
@@ -289,7 +292,7 @@
 
     // mark as read
     $('#btn-markasread').click(function(){
-        mark_as_read(timeline);
+        mark_as_read(timeline, function(){$('#btn-refresh').click});
         return false;
     });
 
