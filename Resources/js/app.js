@@ -74,9 +74,11 @@
         var params = {};
         var user_id;
         var filters;
+
         if (filter && filter.match(/^#userid-/)) {
             user_id = filter.split('-')[1];
         }
+
         if (unread) {
             url = base_url + '/Timeline/getUnreadPlurks';
             filters = {
@@ -98,15 +100,18 @@
                 '#favorite': 'only_favorite'
             };
         }
+
         if (filters[filter]) {
             params.filter = filters[filter];
         }
+
         if (offset) {
             params.offset = offset;
         } else {
             $('#timeline').empty();
         }
         $('#no-more').hide();
+
         oauth.request({
             method: 'GET',
             'url': url,
