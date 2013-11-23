@@ -24,6 +24,7 @@ $(function(){
     $.tmpl($('#image'), {'url': url}).appendTo($('body'));
     $('body').on('a', 'click', function(){
         Ti.Platform.openURL($(this).attr('href'));
+        return false;
     });
 });
 </script>
