@@ -304,6 +304,28 @@
             failure: function(data){ console.log("error"); console.log(data); alert('回應失敗，請稍候再試'); $input.prop('disabled', false); }
         });
         return false;
+    }).on('submit', 'form.reply-upload', function(){
+        var $container = $(this).parents('div.post-container').first();
+        var $file = $(this).find('input.reply-picture').first();
+        var $input = $container.find('input.reply-new-text').first();
+        var url = base_url + '/Timeline/uploadPicture';
+        var $btn = $(this).find('button');
+        $btn.prop('disabled', true);
+
+        oauth.request({
+            method: 'POST',
+            'url': url,
+            data: {'image': $file[0].files[0]},
+            success: function(data) {
+                data = JSON.parse(data.text);
+                console.log(data);
+                $input.val($input.val() + data.full);
+                $btn.prop('disabled', false);
+            },
+            failure: function(data){ console.log("error"); console.log(data); alert('上傳失敗，請稍候再試'); $btn.prop('disabled', false); }
+        });
+
+        return false;
     }).on('click', 'span.post-reply-hide', function(){
         $(this).parent().parent().hide();
         return false;
