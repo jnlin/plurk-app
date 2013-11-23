@@ -188,8 +188,14 @@
     $('#timeline').on('click', '#new-plurk-content', function(){
         load_timeline();
     }).on('click', 'div.post-content a, span.reply-text a', function(){
-        // open url in default browser
-        Ti.Platform.openURL($(this).attr('href'));
+        var url = $(this).attr('href');
+        if (url.match(/\.(gif|jpg|jpeg|png)$/i)) {
+            // open images in new window
+            window.open('app://org.jnlin.plurk/image.html#' + url);
+        } else {
+            // open url in default browser
+            Ti.Platform.openURL($(this).attr('href'));
+        }
         return false;
     }).on('click', 'div.post-content, a.post-btn-reply', function(){
         var $container = $(this).parents('div.post-container').first();
