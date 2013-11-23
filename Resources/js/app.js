@@ -289,7 +289,7 @@
 
     // mark as read
     $('#btn-markasread').click(function(){
-        mark_as_read(timeline, function(){$('#btn-refresh').click});
+        mark_as_read(timeline, function(){$('#btn-refresh').click()});
         return false;
     });
 
