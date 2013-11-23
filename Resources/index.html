@@ -110,7 +110,7 @@ data-plurkid="${plurk_id}" data-unread="${is_unread}" data-favorite="${favorite}
 </div>
 <div class="post-owner media-body">
 <h4 class="media-heading">
-${display_name}
+<a href="#userid-${owner_id}">${display_name}</a>
 </h4>
 <div class="post-time">
 <span class="glyphicon glyphicon-lock{{if 0 == private_plurk}} hide{{/if}}"></span> <span class="glyphicon glyphicon-heart{{if 0 == favorite}} hide{{/if}}"></span> ${posted}
@@ -151,7 +151,7 @@ ${display_name}
 </script>
 <script id="reply" type="text/html">
 <tr class="reply-row {{if 1 == is_owner}}success{{/if}}">
-<td class="reply-content"><p><span class="reply-displayname" style="font-weight: bold"> ${display_name} </span> <span class="reply-text"> {{html content}} </span></p></td>
+<td class="reply-content"><p><span class="reply-displayname" style="font-weight: bold"> <a href="#userid-${owner_id}">${display_name}</a> </span> <span class="reply-text"> {{html content}} </span></p></td>
 </tr>
 </script>
 	<script type="text/javascript" src="js/app.js"></script>

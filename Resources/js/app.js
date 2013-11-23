@@ -46,6 +46,7 @@
                 var owner = data.friends[response.user_id];
                 posts.push({
                     content: response.content,
+                    owner_id: owner.id,
                     display_name: owner.display_name,
                     is_owner: owner.id == $plurk.attr('data-owner') ? 1 : 0
                 });
@@ -70,7 +71,11 @@
         var url;
         var filter = $('#root').attr('data-filter');
         var unread = ("1" == $('#filter-only-unread').attr('data-set'));
+        var user_id;
         var filters;
+        if (filter && filter.match(/^#userid-/)) {
+            user_id = filter.split('-')[1];
+        }
         if (unread) {
             url = base_url + '/Timeline/getUnreadPlurks';
             filters = {
@@ -79,6 +84,9 @@
                 '#private': 'private',
                 '#favorite': 'favorite'
             };
+        } else if (user_id) {
+            url = base_url + '/Timeline/getPublicPlurks?user_id=' + user_id;
+            filters = {};
         } else {
             url = base_url + '/Timeline/getPlurks';
             filters = {
