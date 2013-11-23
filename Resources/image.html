@@ -22,7 +22,7 @@ $(function(){
     var url = location.hash;
     url = url.replace(/^#/, '');
     $.tmpl($('#image'), {'url': url}).appendTo($('body'));
-    $('body').on('a', 'click', function(){
+    $('body').on('click', 'a', function(){
         Ti.Platform.openURL($(this).attr('href'));
         return false;
     });
