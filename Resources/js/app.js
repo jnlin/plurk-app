@@ -138,7 +138,7 @@
                     posts.push({
                         avatar: get_avatar(owner),
                         content: plurk.content,
-                        display_name: plurk.replurker_id ? data.plurk_users[plurk.replurker_id].display_name + ' 轉噗 ' + owner.display_name : owner.display_name,
+                        display_name: owner.display_name,
                         favorite: plurk.favorite ? 1 : 0,
                         favorite_count: plurk.favorite_count,
                         is_unread: plurk.is_unread,
@@ -152,7 +152,9 @@
                         response_count: plurk.response_count,
                         replurkable: plurk.replurkable,
                         replurked: plurk.replurked ? 1 : 0,
-                        replurkers_count: plurk.replurkers_count
+                        replurkers_count: plurk.replurkers_count,
+                        replurker_id: plurk.replurker_id ? plurk.replurker_id : 0,
+                        replurker_display_name: plurk.replurker_id ? data.plurk_users[plurk.replurker_id].display_name : ''
                     });
                     timeline.push(plurk.plurk_id);
                     oldest = (new Date(Date.parse(plurk.posted))).toISOString();

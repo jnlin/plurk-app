@@ -110,7 +110,11 @@ data-plurkid="${plurk_id}" data-unread="${is_unread}" data-favorite="${favorite}
 </div>
 <div class="post-owner media-body">
 <h4 class="media-heading">
+{{if 0 == replurker_id}}
 <a href="#userid-${owner_id}">${display_name}</a>
+{{else}}
+<a href="#userid-${replurker_id}">${replurker_display_name}</a> 轉噗 <a href="#userid-${owner_id}">${display_name}</a>
+{{/if}}
 </h4>
 <div class="post-time">
 <span class="glyphicon glyphicon-lock{{if 0 == private_plurk}} hide{{/if}}"></span> <span class="glyphicon glyphicon-heart{{if 0 == favorite}} hide{{/if}}"></span> ${posted}
