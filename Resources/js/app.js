@@ -4,7 +4,7 @@
     var a_key = localStorage.access_key;
     var a_secret = localStorage.access_token;
 
-    var base_url = 'https://www.plurk.com/APP';
+    var base_url = 'http://www.plurk.com/APP';
     var bind_scroll = false;
 
     var options = {
