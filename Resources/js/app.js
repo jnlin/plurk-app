@@ -250,7 +250,21 @@
             failure: function(data){ console.log("error"); console.log(data); }
         });
         return false;
+    }).on('click', 'a.post-btn-delete', function(){
+        var $container = $(this).parents('div.post-container').first();
+        var id = $container.attr('data-plurkid');
+        var url = base_url + '/Timeline/plurkDelete';
 
+        oauth.request({
+            method: 'POST',
+            'url': url,
+            data: {'plurk_id': id},
+            success: function(data){
+                $('#timeline').find('div[data-plurkid="' + id + '"]').fadeOut(800, function(){ $(this).remove();});
+            },
+            failure: function(data){ console.log("error"); console.log(data); }
+        });
+        return false;
     }).on('submit', 'form.reply-form', function(){
         var $container = $(this).parents('div.post-container').first();
         var $input = $(this).find('input.reply-new-text').first();

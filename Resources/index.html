@@ -144,6 +144,7 @@ ${display_name}
 <span{{if 1 == is_unread}} style="font-weight: bold"{{/if}}><a href="#" class="post-btn-reply">回應</a> (${response_count})</span> |
 <span><a href="#" class="post-btn-favorite">{{if 1 == favorite}}收回讚{{else}}讚{{/if}}</a> (${favorite_count}) </span>
 {{if 1 == replurkable}}| <span> <a href="#" class="post-btn-replurk"> {{if 1 == replurked}} 收回轉噗 {{else}} 轉噗 {{/if}}</a> (${replurkers_count}){{/if}} </span>
+{{if 1 == is_owner}}| <span> <a href="#" class="post-btn-delete"> 刪除</a> </span>{{/if}}
 </div>
 </div>
 </div>
