@@ -23,9 +23,6 @@
             'url': url,
             data: {'ids': '[' + ids.join(',') + ']'},
             success: function(data){
-                for (var i in ids) {
-                    $('#timeline').find('div[data-plurkid="' + ids[i] + '"]').removeClass('panel-warning').addClass('panel-default');
-                }
                 if (callback) {
                     callback();
                 }
