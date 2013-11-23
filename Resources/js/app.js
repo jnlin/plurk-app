@@ -338,6 +338,24 @@
         return false;
     });
 
+    $('#upload-file').submit(function(){
+        var url = base_url + '/Timeline/uploadPicture';
+
+        oauth.request({
+            method: 'POST',
+            'url': url,
+            data: {'image': $('#picture')[0].files[0]},
+            success: function(data) {
+                data = JSON.parse(data.text);
+                console.log(data);
+                $('#post-new-text').val($('#post-new-text').val() + data.full);
+            },
+            failure: function(data){ console.log("error"); console.log(data); alert('上傳失敗，請稍候再試');}
+        });
+
+        return false;
+    });
+
     // refresh
     $('#btn-refresh').click(function(){
         load_timeline();
@@ -431,7 +449,7 @@
         }
     };
 
-    Ti.UI.getCurrentWindow().setSize(800, 600);
+    Ti.UI.getCurrentWindow().setSize(1000, 600);
 
     if (!(a_key && a_secret)) {
         alert("請先登入噗浪。");
