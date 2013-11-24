@@ -181,7 +181,7 @@ data-plurkid="${plurk_id}" data-unread="${is_unread}" data-favorite="${favorite}
 </script>
 <script id="reply" type="text/html">
 <tr class="reply-row {{if 1 == is_owner}}success{{/if}}">
-<td class="reply-content"><span class="reply-displayname" style="font-weight: bold"> <a href="#userid-${owner_id}">${display_name}</a> </span> <span class="reply-text"> {{html content}} </span></td>
+<td class="reply-content"><div style="display: inline"><span class="reply-displayname" style="font-weight: bold"> <a href="#userid-${owner_id}">${display_name}</a> </span> </div> <div style="display: inline"> <span class="reply-text"> {{html content}} </span> </div> </td>
 </tr>
 </script>
 	<script type="text/javascript" src="js/app.js"></script>
