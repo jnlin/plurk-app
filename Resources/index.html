@@ -163,14 +163,9 @@ data-plurkid="${plurk_id}" data-unread="${is_unread}" data-favorite="${favorite}
 <div class="container">
 <form role="form" class="reply-form form-inline" style="display: inline-block">
 <div class="form-group">
-<input type="text" class="form-control input-sm reply-new-text" placeholder="我要回覆..." size="80">
+<input type="text" class="form-control input-sm reply-new-text" placeholder="我要回覆..." size="90">
 </div> <button type="submit" class="btn btn-primary btn-sm">發送</button>
-</form>
-<form class="form-inline reply-upload" style="display: inline-block">
-<div class="form-group">
-<input type="file" name="picture" value="value" class="form-control input-sm reply-picture">
-</div>
-<button type="submit" class="btn btn-primary btn-sm">上傳</button>
+<button class="btn btn-info btn-sm reply-upload-image" type="button" data-toggle="modal" data-target="#upload-image"><span class="glyphicon glyphicon-picture"></span></button>
 </form>
 </div>
 </div>
