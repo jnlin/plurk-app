@@ -133,6 +133,7 @@
                 for (var i in data.plurks) {
                     var plurk = data.plurks[i];
                     var owner = data.plurk_users[plurk.owner_id];
+                    oldest = (new Date(Date.parse(plurk.posted))).toISOString();
                     if (filter_users && !filter_users[owner.id + '']) {
                         continue;
                     }
@@ -158,7 +159,6 @@
                         replurker_display_name: plurk.replurker_id ? data.plurk_users[plurk.replurker_id].display_name : ''
                     });
                     timeline.push(plurk.plurk_id);
-                    oldest = (new Date(Date.parse(plurk.posted))).toISOString();
                 }
 
                 if (!offset) {
