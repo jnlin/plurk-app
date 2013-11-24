@@ -91,18 +91,37 @@
         </script>
         <form id="post-new-form" class="form-inline" role="form" style="display: inline-block">
         <div class="form-group">
-        <input type="text" class="form-control" id="post-new-text" placeholder="我要發噗..." size="40">
+        <input type="text" class="form-control" id="post-new-text" placeholder="我要發噗..." size="50">
         </div> <input type="checkbox" name="private" id="post-private">私噗</label> <button type="submit" class="btn btn-primary">發送</button>
         </form>
-        <form id="upload-file" class="form-inline" style="display: inline-block">
-        <div class="form-group">
-        <input type="file" name="picture" value="value" id="picture" class="form-control">
-        </div>
-        <button type="submit" class="btn btn-primary">上傳</button>
-        </form>
+        <button class="btn btn-info" id="btn-upload-image" type="button" data-toggle="modal" data-target="#upload-image"><span class="glyphicon glyphicon-picture"></span> 圖片</button>
         </div>
         </div>
 </div>
+
+<div class="modal fade" id="upload-image" tabindex="-1" role="dialog" aria-labelledby="upload-image-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="upload-file">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="upload-image-label">上傳圖片</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+        <input type="file" name="picture" value="value" id="picture" class="form-control">
+        </div>
+        <p>支援 JPG, PNG, GIF</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="submit" class="btn btn-primary">上傳</button>
+      </div>
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 <script id="new-plurk" type="text/html">
 <div class="alert alert-info" id="new-plurk-content" style="cursor: pointer;">有新噗 ${all} 則，按這裡更新</div>
 </script>
