@@ -295,7 +295,7 @@
         return false;
     }).on('submit', 'form.reply-form', function(){
         var $container = $(this).parents('div.post-container').first();
-        var $input = $(this).find('input.reply-new-text').first();
+        var $input = $(this).find('textarea.reply-new-text').first();
         var id = $container.attr('data-plurkid');
         url = base_url + '/Responses/responseAdd';
         $input.prop('disabled', true);
@@ -548,6 +548,14 @@
         $(this).attr('data-set', "1" == $(this).attr('data-set') ? 0 : 1).find('span').toggleClass('hidden');
         load_timeline();
         return false;
+    });
+
+    $('body').on('keyup', 'textarea', function(e) {
+        if (e.which == 13 && ! e.shiftKey) {
+            $(this).parents('form').first().submit();
+            return false;
+        }
+        return true;
     });
 
 })(jQuery);

@@ -91,7 +91,7 @@
         </script>
         <form id="post-new-form" class="form-inline" role="form" style="display: inline-block">
         <div class="form-group">
-        <input type="text" class="form-control" id="post-new-text" placeholder="我要發噗..." size="50">
+        <textarea type="text" class="form-control" id="post-new-text" placeholder="我要發噗..." rows="1" cols="50"></textarea>
         </div> <input type="checkbox" name="private" id="post-private">私噗</label> <button type="submit" class="btn btn-primary">發送</button>
         </form>
         <button class="btn btn-info" id="btn-upload-image" type="button" data-toggle="modal" data-target="#upload-image"><span class="glyphicon glyphicon-picture"></span> 圖片</button>
@@ -163,7 +163,7 @@ data-plurkid="${plurk_id}" data-unread="${is_unread}" data-favorite="${favorite}
 <div class="container">
 <form role="form" class="reply-form form-inline" style="display: inline-block">
 <div class="form-group">
-<input type="text" class="form-control input-sm reply-new-text" placeholder="我要回覆..." size="90">
+<textarea class="form-control input-sm reply-new-text" placeholder="我要回覆..." cols="90" rows="1"></textarea>
 </div> <button type="submit" class="btn btn-primary btn-sm">發送</button>
 <button class="btn btn-info btn-sm reply-upload-image" type="button" data-toggle="modal" data-target="#upload-image"><span class="glyphicon glyphicon-picture"></span></button>
 </form>
