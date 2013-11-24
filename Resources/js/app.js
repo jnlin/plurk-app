@@ -6,6 +6,7 @@
 
     var base_url = 'http://www.plurk.com/APP';
     var bind_scroll = false;
+    var upload_target = null;
 
     var options = {
         consumerKey: c_key,
@@ -309,28 +310,9 @@
             failure: function(data){ console.log("error"); console.log(data); alert('回應失敗，請稍候再試'); $input.prop('disabled', false); }
         });
         return false;
-    }).on('submit', 'form.reply-upload', function(){
+    }).on('click', 'button.reply-upload-image', function(){
         var $container = $(this).parents('div.post-container').first();
-        var $file = $(this).find('input.reply-picture').first();
-        var $input = $container.find('input.reply-new-text').first();
-        var url = base_url + '/Timeline/uploadPicture';
-        var $btn = $(this).find('button');
-        $btn.prop('disabled', true);
-
-        oauth.request({
-            method: 'POST',
-            'url': url,
-            data: {'image': $file[0].files[0]},
-            success: function(data) {
-                data = JSON.parse(data.text);
-                console.log(data);
-                $input.val($input.val() + data.full);
-                $btn.prop('disabled', false);
-            },
-            failure: function(data){ console.log("error"); console.log(data); alert('上傳失敗，請稍候再試'); $btn.prop('disabled', false); }
-        });
-
-        return false;
+        upload_target = $container.find('input.reply-new-text').first();
     }).on('click', 'span.post-reply-hide', function(){
         $(this).parent().parent().hide();
         return false;
@@ -365,6 +347,10 @@
         return false;
     });
 
+    $('#btn-upload-image').click(function(){
+        upload_target = $('#post-new-text');
+    });
+
     $('#upload-file').submit(function(){
         var url = base_url + '/Timeline/uploadPicture';
         var $btn = $(this).find('button');
@@ -377,8 +363,9 @@
             success: function(data) {
                 data = JSON.parse(data.text);
                 console.log(data);
-                $('#post-new-text').val($('#post-new-text').val() + data.full);
+                $(upload_target).val($(upload_target).val() + data.full);
                 $btn.prop('disabled', false);
+                $('#upload-image').modal('hide');
             },
             failure: function(data){ console.log("error"); console.log(data); alert('上傳失敗，請稍候再試');$btn.prop('disabled', false);}
         });
