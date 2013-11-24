@@ -374,7 +374,7 @@
     });
 
     // refresh
-    $('#btn-refresh').click(function(){
+    $('#btn-refresh, #btn-head').click(function(){
         load_timeline();
         update_cliques();
         polling();
