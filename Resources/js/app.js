@@ -550,7 +550,7 @@
         return false;
     });
 
-    $('body').on('keyup', 'textarea', function(e) {
+    $('body').on('keydown', 'textarea', function(e) {
         if (e.which == 13 && ! e.shiftKey) {
             $(this).parents('form').first().submit();
             return false;
