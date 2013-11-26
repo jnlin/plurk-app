@@ -146,8 +146,8 @@
                         favorite_count: plurk.favorite_count,
                         is_unread: plurk.is_unread,
                         is_owner: owner.id == $('#root').attr('data-userid') ? 1 : 0,
-                        is_friend: friends_hash[owner.id],
-                        is_fan: !friends_hash[owner.id],
+                        is_friend: friends_hash[owner.id] ? true : false,
+                        is_fan: !friends_hash[owner.id] ? true : false,
                         owner_id: owner.id,
                         plurk_id: plurk.plurk_id,
                         posted: (new Date(Date.parse(plurk.posted))).toLocaleString(),
@@ -473,7 +473,7 @@
         }
 
         for (var i in friends) {
-            friends_hash[friends[i].id + ''] = true;
+            friends_hash[friends[i].id + ''] = friends[i].nick_name;
         }
     };
 
@@ -503,7 +503,7 @@
         }
 
         for (var i in following) {
-            following_hash[following[i].id + ''] = true;
+            following_hash[following[i].id + ''] = following[i].nick_name;
         }
     };
 
