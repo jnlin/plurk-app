@@ -112,7 +112,7 @@
         } else {
             $('#timeline').empty();
         }
-        $('#no-more').hide();
+        $('#no-more, #more').hide();
         $('#loading').show();
 
         oauth.request({
@@ -171,6 +171,8 @@
                 }
                 if (unread && posts.length <= 0) {
                     $('#no-more').show();
+                } else {
+                    $('#more').show();
                 }
                 $('#loading').hide();
                 $.tmpl($('#post'), posts).appendTo('#timeline');
@@ -403,6 +405,12 @@
                 Ti.App.exit();
             }, 2000);
         }
+    });
+
+    // more
+    $('#more').click(function(){
+        load_timeline($('#root').attr('data-offset'));
+        return false;
     });
 
     // menu
