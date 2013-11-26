@@ -497,6 +497,13 @@
         });
     };
 
+    // groups
+    var groups = localStorage.groups || '[]';
+    groups = JSON.parse(groups);
+    for (var i in groups) {
+        $.tmpl($('#filter-group'), {'id': i, 'name': groups[i].name}).appendTo('#filter-ul');
+    }
+
     // friends
     var friends = [];
     var friends_hash = {};
