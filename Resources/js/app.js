@@ -316,6 +316,10 @@
     }).on('click', 'span.post-reply-hide', function(){
         $(this).parent().parent().hide();
         return false;
+    }).on('mouseover', 'tr.reply-row', function(){
+        $(this).find('div.reply-mention').show();
+    }).on('mouseout', 'tr.reply-row', function(){
+        $(this).find('div.reply-mention').hide();
     });
 
     // mark as read
