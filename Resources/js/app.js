@@ -448,6 +448,20 @@
             add_group_member($(this));
         });
 
+        $('#new-group').submit(function(){
+            var result = {};
+            $('#group-member span.group-member').each(function(i, val){
+                result[$(val).attr('data-userid')] = $(val).attr('data-username');
+            });
+
+            var id = 0;
+
+            $.tmpl($('#filter-group'), {'id': id, 'name': $('#group-name').val()}).appendTo('#filter-ul');
+
+            $('#add-new-group').modal('hide');
+            return false;
+        });
+
         $('.typeahead.input-sm').siblings('input.tt-hint').addClass('hint-small');
         $('.typeahead.input-lg').siblings('input.tt-hint').addClass('hint-large');
     });
