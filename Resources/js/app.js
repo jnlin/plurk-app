@@ -128,6 +128,8 @@
                 data = JSON.parse(data.text);
                 if (filter && filter.match(/^#clique-/)) {
                     filter_users = clique_members[filter.split('-')[1]];
+                } else if (filter && filter.match(/^#group-/)) {
+                    filter_users = groups[filter.split('-')[1]].members;
                 } else if ('#friends' == filter) {
                     filter_users = friends_hash;
                 }
