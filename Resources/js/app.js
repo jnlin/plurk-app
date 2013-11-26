@@ -454,7 +454,9 @@
                 result[$(val).attr('data-userid')] = $(val).attr('data-username');
             });
 
-            var id = 0;
+            var id = groups.length;
+            groups.push({name: $('#group-name').val(), members: result});
+            localStorage.groups = JSON.stringify(groups);
 
             $.tmpl($('#filter-group'), {'id': id, 'name': $('#group-name').val()}).appendTo('#filter-ul');
 
