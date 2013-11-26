@@ -418,32 +418,34 @@
         update_following();
 
         var following_friends = [];
+        var following_friends_id = {};
         for (var i in friends_hash) {
             following_friends.push(friends_hash[i]);
+            following_friends_id[friends_hash[i]] = i;
         }
         for (var i in following_hash) {
             following_friends.push(following_hash[i]);
+            following_friends_id[following_hash[i]] = i;
         }
+
+        var add_group_member = function(that){
+            $.tmpl($('#group-member-tmpl'), {user_id: following_friends_id[that.val()], user_name: that.val()}).appendTo($('#group-member'));
+            that.typeahead('setQuery', '').val('');
+        };
 
         // auto complete for username
         $('#user-name').typeahead({
             name: 'username',
             local: following_friends
         }).bind('keydown', function(e){
-            var $this = $(this);
             if (e.which == 13) {
-                $.tmpl($('#group-member-tmpl'), {user_id: '0', user_name: $this.val()}).appendTo($('#group-member'));
-                $this.typeahead('setQuery', '').val('');
+                add_group_member($(this));
                 return false;
             }
         }).bind('typeahead:autocompleted', function(){
-            var $this = $(this);
-            $.tmpl($('#group-member-tmpl'), {user_id: '0', user_name: $this.val()}).appendTo($('#group-member'));
-            $this.typeahead('setQuery', '').val('');
+            add_group_member($(this));
         }).bind('typeahead:selected', function(){
-            var $this = $(this);
-            $.tmpl($('#group-member-tmpl'), {user_id: '0', user_name: $this.val()}).appendTo($('#group-member'));
-            $this.typeahead('setQuery', '').val('');
+            add_group_member($(this));
         });
 
         $('.typeahead.input-sm').siblings('input.tt-hint').addClass('hint-small');
