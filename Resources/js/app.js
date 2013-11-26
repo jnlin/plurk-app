@@ -113,6 +113,7 @@
             $('#timeline').empty();
         }
         $('#no-more').hide();
+        $('#loading').show();
 
         oauth.request({
             method: 'GET',
@@ -171,6 +172,7 @@
                 if (unread && posts.length <= 0) {
                     $('#no-more').show();
                 }
+                $('#loading').hide();
                 $.tmpl($('#post'), posts).appendTo('#timeline');
                 if (!bind_scroll) {
                     bind_scroll = true;
