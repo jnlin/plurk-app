@@ -477,6 +477,36 @@
         }
     };
 
+    var following = [];
+    var following_hash = {};
+    var update_following = function() {
+        var url = base_url + '/FriendsFans/getFollowingByOffset';
+        var offset = 0;
+        var done = false;
+        following = [];
+        following_hash = {};
+        while (!done) {
+            oauth.request({
+                'url': url,
+                'method': 'GET',
+                'data': {'offset': offset + '', 'limit': '100'},
+                'async': false,
+                'success': function(data){
+                    data = JSON.parse(data.text);
+                    if (data.length) {
+                        following = following.concat(data);
+                        offset += 100;
+                    } else {
+                        done = true;
+                    }
+            }, failure: function(data){ console.log('error'); console.log(data); done = true;}});
+        }
+
+        for (var i in following) {
+            following_hash[following[i].id + ''] = true;
+        }
+    };
+
     Ti.UI.getCurrentWindow().setSize(800, 600);
 
     if (!(a_key && a_secret)) {
