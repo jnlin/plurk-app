@@ -373,7 +373,6 @@
             data: {'image': $('#picture')[0].files[0]},
             success: function(data) {
                 data = JSON.parse(data.text);
-                console.log(data);
                 $(upload_target).val($(upload_target).val() + data.full);
                 $btn.prop('disabled', false);
                 $('#upload-image').modal('hide');
