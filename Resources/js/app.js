@@ -442,7 +442,7 @@
                     }, failure: function(data){ console.log('error'); console.log(data); }});
             }
             $('li.clique-item').remove();
-            $.tmpl($('#filter-clique'), cliques).appendTo('#filter-ul');
+            $.tmpl($('#filter-clique'), cliques).insertBefore('#filter-group');
         });
     };
 
