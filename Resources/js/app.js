@@ -415,6 +415,39 @@
         $('#root').attr('data-userid', data.id);
         $('#root').attr('data-friends-count', data.friends_count);
         update_friends();
+        update_following();
+
+        var following_friends = [];
+        for (var i in friends_hash) {
+            following_friends.push(friends_hash[i]);
+        }
+        for (var i in following_hash) {
+            following_friends.push(following_hash[i]);
+        }
+
+        // auto complete for username
+        $('#user-name').typeahead({
+            name: 'username',
+            local: following_friends
+        }).bind('keydown', function(e){
+            var $this = $(this);
+            if (e.which == 13) {
+                $.tmpl($('#group-member-tmpl'), {user_id: '0', user_name: $this.val()}).appendTo($('#group-member'));
+                $this.typeahead('setQuery', '').val('');
+                return false;
+            }
+        }).bind('typeahead:autocompleted', function(){
+            var $this = $(this);
+            $.tmpl($('#group-member-tmpl'), {user_id: '0', user_name: $this.val()}).appendTo($('#group-member'));
+            $this.typeahead('setQuery', '').val('');
+        }).bind('typeahead:selected', function(){
+            var $this = $(this);
+            $.tmpl($('#group-member-tmpl'), {user_id: '0', user_name: $this.val()}).appendTo($('#group-member'));
+            $this.typeahead('setQuery', '').val('');
+        });
+
+        $('.typeahead.input-sm').siblings('input.tt-hint').addClass('hint-small');
+        $('.typeahead.input-lg').siblings('input.tt-hint').addClass('hint-large');
     });
 
     // cliques
