@@ -48,6 +48,7 @@
                 posts.push({
                     content: response.content,
                     owner_id: owner.id,
+                    owner_name: owner.nick_name,
                     display_name: owner.display_name,
                     is_owner: owner.id == $plurk.attr('data-owner') ? 1 : 0
                 });
@@ -320,6 +321,12 @@
         $(this).find('div.reply-mention').show();
     }).on('mouseout', 'tr.reply-row', function(){
         $(this).find('div.reply-mention').hide();
+    }).on('click', 'div.reply-mention a', function(){
+        var id = $(this).parents('tr').first().attr('data-ownername');
+        var $input = $(this).parents('div.panel-body').first().find('textarea.reply-new-text').first();
+        $input.focus().val($input.val() + '@' + id + ' ');
+
+        return false;
     });
 
     // mark as read
