@@ -475,7 +475,7 @@
                     }, failure: function(data){ console.log('error'); console.log(data); }});
             }
             $('li.clique-item').remove();
-            $.tmpl($('#filter-clique'), cliques).insertBefore('#filter-group');
+            $.tmpl($('#filter-clique'), cliques).insertBefore('#filter-group-divider');
         });
     };
 
