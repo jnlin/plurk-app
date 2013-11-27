@@ -599,7 +599,7 @@
         }
     };
 
-    Ti.UI.getCurrentWindow().setSize(840, 600);
+    Ti.UI.getCurrentWindow().setSize(800, 600);
 
     if (!(a_key && a_secret)) {
         alert("請先登入噗浪。");
