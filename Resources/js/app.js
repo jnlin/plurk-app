@@ -1,4 +1,25 @@
 (function($, undefined){
+    Date.prototype.format = function(format) //author: meizz
+    {
+        var o = {
+            "M+" : this.getMonth()+1, //month
+            "d+" : this.getDate(),    //day
+            "h+" : this.getHours(),   //hour
+            "m+" : this.getMinutes(), //minute
+            "s+" : this.getSeconds(), //second
+            "q+" : Math.floor((this.getMonth()+3)/3),  //quarter
+            "S" : this.getMilliseconds() //millisecond
+        }
+
+        if(/(y+)/.test(format))
+            format=format.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+        for(var k in o)if(new RegExp("("+ k +")").test(format))
+            format = format.replace(RegExp.$1, RegExp.$1.length==1 ? o[k] : ("00"+ o[k]).substr((""+ o[k]).length));
+
+        return format;
+    }
+
+
     var c_key = 'kqLXG7kuozbA';
     var c_secret = 'D5gP8qqozYJJ15wKYEPHQwvbXojWql5R';
     var a_key = localStorage.access_key;
@@ -51,7 +72,7 @@
                     is_owner: owner.id == $plurk.attr('data-owner') ? 1 : 0,
                     owner_id: owner.id,
                     owner_name: owner.nick_name,
-                    posted: (new Date(Date.parse(response.posted))).toLocaleString()
+                    posted: (new Date(Date.parse(response.posted))).format('yyyy-MM-dd hh:mm')
                 });
             }
             $reply.empty().append($.tmpl($('#reply'), posts)).parent().parent().show().find('td.reply-content').tooltip();
@@ -154,7 +175,7 @@
                         is_fan: !friends_hash[owner.id] ? true : false,
                         owner_id: owner.id,
                         plurk_id: plurk.plurk_id,
-                        posted: (new Date(Date.parse(plurk.posted))).toLocaleString(),
+                        posted: (new Date(Date.parse(plurk.posted))).format('yyyy-MM-dd hh:mm'),
                         private_plurk: null === plurk.limited_to ? 0 : 1,
                         response_count: plurk.response_count,
                         replurkable: plurk.replurkable,
