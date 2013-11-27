@@ -208,6 +208,7 @@
     }).on('click', 'div.post-content, a.post-btn-reply', function(){
         var $container = $(this).parents('div.post-container').first();
         var id = $container.attr('data-plurkid');
+        $container.find('a.post-btn-reply').parent().css('font-weight', 'normal');
         load_replies(id);
         return false;
     }).on('click', 'a.post-btn-mute', function(){
