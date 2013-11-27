@@ -72,7 +72,7 @@
                     is_owner: owner.id == $plurk.attr('data-owner') ? 1 : 0,
                     owner_id: owner.id,
                     owner_name: owner.nick_name,
-                    posted: (new Date(Date.parse(response.posted))).format('yyyy-MM-dd hh:mm')
+                    posted: (new Date(Date.parse(response.posted))).format('MM-dd hh:mm')
                 });
             }
             $reply.empty().append($.tmpl($('#reply'), posts)).parent().parent().show().find('td.reply-content').tooltip();
