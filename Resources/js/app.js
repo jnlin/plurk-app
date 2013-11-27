@@ -47,13 +47,14 @@
                 var owner = data.friends[response.user_id];
                 posts.push({
                     content: response.content,
+                    display_name: owner.display_name,
+                    is_owner: owner.id == $plurk.attr('data-owner') ? 1 : 0,
                     owner_id: owner.id,
                     owner_name: owner.nick_name,
-                    display_name: owner.display_name,
-                    is_owner: owner.id == $plurk.attr('data-owner') ? 1 : 0
+                    posted: (new Date(Date.parse(response.posted))).toLocaleString()
                 });
             }
-            $reply.empty().append($.tmpl($('#reply'), posts)).parent().parent().show();
+            $reply.empty().append($.tmpl($('#reply'), posts)).parent().parent().show().find('td.reply-content').tooltip();
             mark_as_read([id]);
         },
             failure: function(data) { console.log("error"); console.log(data); }});
