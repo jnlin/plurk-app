@@ -25,7 +25,7 @@
     var a_key = localStorage.access_key;
     var a_secret = localStorage.access_token;
 
-    var base_url = 'http://www.plurk.com/APP';
+    var base_url = 'https://www.plurk.com/APP';
     var bind_scroll = false;
     var upload_target = null;
 
@@ -392,7 +392,8 @@
     });
 
     $('#upload-file').submit(function(){
-        var url = base_url + '/Timeline/uploadPicture';
+        // XXX: uploadPicture do not support HTTPS
+        var url = 'http://www.plurk.com/APP' + '/Timeline/uploadPicture';
         var $btn = $(this).find('button');
         $btn.prop('disabled', true);
 
