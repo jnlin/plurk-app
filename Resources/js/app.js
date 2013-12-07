@@ -546,6 +546,21 @@
     };
     show_groups();
 
+    $('#root').on('click', 'li.group-item span.glyphicon-remove-circle', function(){
+        var id = $(this).parent().attr('href').split('-')[1];
+        var new_groups = [];
+        for (var i in groups) {
+            if (i === id) {
+                continue;
+            }
+            new_groups.push(groups[i]);
+        }
+        groups = new_groups;
+        localStorage.groups = JSON.stringify(groups);
+        $('li.group-item').remove();
+        show_groups();
+        return false;
+    });
 
     // friends
     var friends = [];

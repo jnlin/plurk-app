@@ -74,7 +74,7 @@
                                                 </li>
                                                 <script type="text/html" id="filter-group">
                                                 <li class="group-item">
-                                                <a href="#group-${id}" class="filter"><span class="glyphicon glyphicon-ok hidden"></span> 顯示群組: ${name}</a>
+                                                <a href="#group-${id}" class="filter"><span class="glyphicon glyphicon-ok hidden"></span> 顯示群組: ${name} <span class="glyphicon glyphicon-remove-circle pull-right"></span></a>
                                                 </li>
                                                 </script>
                                                 </ul>
@@ -150,10 +150,10 @@
         <div class="form-group">
         <label>群組成員</label>
         <div id="group-member">
+        </div>
         <script type="text/html" id="group-member-tmpl">
         <span class="group-member" data-userid="${user_id}" data-username="${user_name}">${user_name} &nbsp;</span>
         </script>
-        </div>
         </div>
         <div class="form-group">
         <label>使用者名稱</label>
