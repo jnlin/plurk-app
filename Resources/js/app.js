@@ -706,7 +706,7 @@
         return false;
     });
 
-    $('body').on('keydown', 'textarea', function(e) {
+    $('#root').on('keydown', 'textarea', function(e) {
         if (e.which == 13 && ! e.shiftKey) {
             $(this).parents('form').first().submit();
             return false;
