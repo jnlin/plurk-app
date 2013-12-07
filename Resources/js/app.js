@@ -694,7 +694,7 @@
     // on hash change
     window.onhashchange = function()
     {
-        $('#root').attr('data-filter', location.hash);
+        $('#root').attr('data-filter', location.hash).attr('data-offset', '');
         $('a.filter').find('span.glyphicon-ok').addClass('hidden');
         $('a.filter[href="' + location.hash + '"]').find('span.glyphicon-ok').removeClass('hidden');
         load_timeline();
