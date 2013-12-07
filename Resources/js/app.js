@@ -539,9 +539,13 @@
     // groups
     var groups = localStorage.groups || '[]';
     groups = JSON.parse(groups);
-    for (var i in groups) {
-        $.tmpl($('#filter-group'), {'id': i, 'name': groups[i].name}).appendTo('#filter-ul');
-    }
+    var show_groups = function(){
+            for (var i in groups) {
+            $.tmpl($('#filter-group'), {'id': i, 'name': groups[i].name}).appendTo('#filter-ul');
+        }
+    };
+    show_groups();
+
 
     // friends
     var friends = [];
