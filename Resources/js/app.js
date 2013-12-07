@@ -198,11 +198,11 @@
                 }
                 $('#loading').hide();
                 $.tmpl($('#post'), posts).appendTo('#timeline');
+                $('#root').attr('data-offset', oldest);
                 if (!bind_scroll) {
                     bind_scroll = true;
                     $(window).scroll(load_more_plurks);
                 }
-                $('#root').attr('data-offset', oldest);
             },
             failure: function(data) { console.log("error"); console.log(data); }});
     };
