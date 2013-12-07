@@ -714,4 +714,14 @@
         return true;
     });
 
+    $('#upload-image').on('hidden.bs.modal', function (ev) {
+        $('#picture').val('');
+    });
+
+    $('#add-new-group').on('hidden.bs.modal', function (ev) {
+        $('#group-name').val('');
+        $('#user-name').val('');
+        $('#group-member').empty();
+    });
+
 })(jQuery);
