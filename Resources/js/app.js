@@ -342,7 +342,7 @@
         return false;
     }).on('click', 'button.reply-upload-image', function(){
         var $container = $(this).parents('div.post-container').first();
-        upload_target = $container.find('input.reply-new-text').first();
+        upload_target = $container.find('textarea.reply-new-text').first();
     }).on('click', 'span.post-reply-hide', function(){
         $(this).parent().parent().hide();
         return false;
