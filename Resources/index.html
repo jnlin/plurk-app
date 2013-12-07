@@ -199,13 +199,11 @@ data-plurkid="${plurk_id}" data-unread="${is_unread}" data-favorite="${favorite}
 <div class="post-content" style="cursor: pointer;">
 {{html content}}
 </div>
-<br>
 <div style="display:none" class="post-reply-div">
 <div class="pull-right"><span class="glyphicon glyphicon-remove post-reply-hide"></span></div>
 <div style="overflow-y: auto; max-height: 300px;">
 <table class="table table-striped table-bordered post-reply">
 </table>
-</div>
 </div>
 <div class="container">
 <form role="form" class="reply-form form-inline" style="display: inline-block">
@@ -214,6 +212,7 @@ data-plurkid="${plurk_id}" data-unread="${is_unread}" data-favorite="${favorite}
 </div> <button type="submit" class="btn btn-primary btn-sm">發送</button>
 <button class="btn btn-info btn-sm reply-upload-image" type="button" data-toggle="modal" data-target="#upload-image"><span class="glyphicon glyphicon-picture"></span></button>
 </form>
+</div>
 </div>
 </div>
 <div class="panel-footer">
