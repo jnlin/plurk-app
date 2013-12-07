@@ -684,7 +684,7 @@
         );
     };
 
-    update_cliques();
+    setTimeout(update_cliques, 500);
     load_timeline();
 
     // check new plurk
