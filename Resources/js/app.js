@@ -353,7 +353,7 @@
     }).on('click', 'div.reply-mention a', function(){
         var id = $(this).parents('tr').first().attr('data-ownername');
         var $input = $(this).parents('div.panel-body').first().find('textarea.reply-new-text').first();
-        $input.focus().val($input.val() + '@' + id + ' ');
+        $input.focus().val($input.val() + '@' + id + ': ');
 
         return false;
     });
