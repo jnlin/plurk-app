@@ -450,58 +450,61 @@
 
         $('#root').attr('data-userid', data.id);
         $('#root').attr('data-friends-count', data.friends_count);
-        update_friends();
-        update_following();
 
-        var following_friends = [];
-        var following_friends_id = {};
-        for (var i in friends_hash) {
-            following_friends.push(friends_hash[i]);
-            following_friends_id[friends_hash[i]] = i;
-        }
-        for (var i in following_hash) {
-            following_friends.push(following_hash[i]);
-            following_friends_id[following_hash[i]] = i;
-        }
+        setTimeout(function(){
+            update_friends();
+            update_following();
 
-        var add_group_member = function(that){
-            $.tmpl($('#group-member-tmpl'), {user_id: following_friends_id[that.val()], user_name: that.val()}).appendTo($('#group-member'));
-            that.typeahead('setQuery', '').val('');
-        };
-
-        // auto complete for username
-        $('#user-name').typeahead({
-            name: 'username',
-            local: following_friends
-        }).bind('keydown', function(e){
-            if (e.which == 13) {
-                add_group_member($(this));
-                return false;
+            var following_friends = [];
+            var following_friends_id = {};
+            for (var i in friends_hash) {
+                following_friends.push(friends_hash[i]);
+                following_friends_id[friends_hash[i]] = i;
             }
-        }).bind('typeahead:autocompleted', function(){
-            add_group_member($(this));
-        }).bind('typeahead:selected', function(){
-            add_group_member($(this));
-        });
+            for (var i in following_hash) {
+                following_friends.push(following_hash[i]);
+                following_friends_id[following_hash[i]] = i;
+            }
 
-        $('#new-group').submit(function(){
-            var result = {};
-            $('#group-member span.group-member').each(function(i, val){
-                result[$(val).attr('data-userid')] = $(val).attr('data-username');
+            var add_group_member = function(that){
+                $.tmpl($('#group-member-tmpl'), {user_id: following_friends_id[that.val()], user_name: that.val()}).appendTo($('#group-member'));
+                that.typeahead('setQuery', '').val('');
+            };
+
+            // auto complete for username
+            $('#user-name').typeahead({
+                name: 'username',
+                local: following_friends
+            }).bind('keydown', function(e){
+                if (e.which == 13) {
+                    add_group_member($(this));
+                    return false;
+                }
+            }).bind('typeahead:autocompleted', function(){
+                add_group_member($(this));
+            }).bind('typeahead:selected', function(){
+                add_group_member($(this));
             });
 
-            var id = groups.length;
-            groups.push({name: $('#group-name').val(), members: result});
-            localStorage.groups = JSON.stringify(groups);
+            $('#new-group').submit(function(){
+                var result = {};
+                $('#group-member span.group-member').each(function(i, val){
+                    result[$(val).attr('data-userid')] = $(val).attr('data-username');
+                });
 
-            $.tmpl($('#filter-group'), {'id': id, 'name': $('#group-name').val()}).appendTo('#filter-ul');
+                var id = groups.length;
+                groups.push({name: $('#group-name').val(), members: result});
+                localStorage.groups = JSON.stringify(groups);
 
-            $('#add-new-group').modal('hide');
-            return false;
-        });
+                $.tmpl($('#filter-group'), {'id': id, 'name': $('#group-name').val()}).appendTo('#filter-ul');
 
-        $('.typeahead.input-sm').siblings('input.tt-hint').addClass('hint-small');
-        $('.typeahead.input-lg').siblings('input.tt-hint').addClass('hint-large');
+                $('#add-new-group').modal('hide');
+                return false;
+            });
+
+            $('.typeahead.input-sm').siblings('input.tt-hint').addClass('hint-small');
+            $('.typeahead.input-lg').siblings('input.tt-hint').addClass('hint-large');
+        }, 2000);
     });
 
     // cliques
