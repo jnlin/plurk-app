@@ -262,9 +262,9 @@
         var favorite = (1 == $container.attr('data-favorite'));
         var url;
         if (favorite) {
-            url = base_url + '/Timeline/favoritePlurks';
-        } else {
             url = base_url + '/Timeline/unfavoritePlurks';
+        } else {
+            url = base_url + '/Timeline/favoritePlurks';
         }
         oauth.request({
             method: 'POST',
