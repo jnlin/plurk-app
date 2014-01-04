@@ -207,13 +207,13 @@
             failure: function(data) { console.log("error"); console.log(data); }});
     };
 
-    var load_more_plurks = function(){
+    var load_more_plurks = Delayed(function(){
         if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
             $(window).unbind('scroll');
             bind_scroll = false;
             load_timeline($('#root').attr('data-offset'));
         }
-    };
+    }, 300);
 
     $('#timeline').on('click', '#new-plurk-content', function(){
         load_timeline();
