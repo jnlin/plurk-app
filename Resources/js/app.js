@@ -208,7 +208,7 @@
     };
 
     var load_more_plurks = Delayed(function(){
-        if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+        if($(window).scrollTop() + $(window).height() > $(document).height() - 200) {
             $(window).unbind('scroll');
             bind_scroll = false;
             load_timeline($('#root').attr('data-offset'));
